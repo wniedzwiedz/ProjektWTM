@@ -63,4 +63,12 @@ public class YourGroupFragment extends Fragment {
 //
 //        return true;
 //    }
+
+//    Button button = findViewById(R.id.button5);
+//        button.setOnClickListener(new View.OnClickListener(){
+//        public void onClick(View v){
+//usuniecie grupy
+//podmiana fragmentu na inny
+//    });
+//    }
 }

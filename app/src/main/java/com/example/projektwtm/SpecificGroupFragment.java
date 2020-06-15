@@ -15,4 +15,13 @@ public class SpecificGroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_specific_group, container, false);
     }
+
+//    Button button = findViewById(R.id.button8);
+//        button.setOnClickListener(new View.OnClickListener(){
+//        public void onClick(View v){
+//dodanie grupy uzytkownikowi
+//podmiana fragmentu na widok grupy, do ktorej sie teraz nalezy
+//    });
+//    }
+    
 }

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        
+
         EditText firstNameET = findViewById(R.id.editText9);
         EditText surnameET = findViewById(R.id.editText7);
         EditText emailET = findViewById(R.id.editText6);
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         final String email = emailET.getText().toString();
         final String pass1 = pass1ET.getText().toString();
         final String pass2 = pass2ET.getText().toString();
-        
+
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -65,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean register(String firstname, String surname, String email, String pass1, String pass2) {
         if (firstname.equals("") || surname.equals("") || email.equals("") || pass1.equals("") || pass2.equals("")) {
-            return false;
-        }
-        else if (!pass1.equals(pass2)) {
             return false;
         }
         else if (!Pattern.matches("[A-Za-z]+", firstname) || !Pattern.matches("[A-Za-z]+", surname) || !Pattern.matches("[A-Za-z]+[1-9_]*[@]{1}[A-Za-z1-9]+[.]{1}[a-z]+[.]{0,1}[a-z]+}", email) || !Pattern.matches("[A-Za-z1-9_!@]+", pass1)  || !Pattern.matches("[A-Za-z1-9_!@]+", pass2)) {

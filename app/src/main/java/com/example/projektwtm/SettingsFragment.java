@@ -101,7 +101,7 @@ public class SettingsFragment extends Fragment {
 //                }
 //        }
 //    });
-    
+
 //    public boolean changeFirstname(String firstname) {
 //        if (firstname.equals("")) {
 //            return false;
@@ -144,4 +144,14 @@ public class SettingsFragment extends Fragment {
 //        }
 //        return true;
 //    }
+    
+
+//    Button button = findViewById(R.id.button11);
+//        button.setOnClickListener(new View.OnClickListener(){
+//        public void onClick(View v){
+//wylogowanie
+//podmiana widoku
+//    });
+//    }
+
 }

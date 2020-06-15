@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.PatternMatcher;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,7 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView8);
         textView.setText(Html.fromHtml("<font color='black'><u>"+ getResources().getString(R.string.linkLogin) +"</u></font>"));
-
+        textView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        
         EditText firstNameET = findViewById(R.id.editText9);
         EditText surnameET = findViewById(R.id.editText7);
         EditText emailET = findViewById(R.id.editText6);
@@ -33,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
         final String email = emailET.getText().toString();
         final String pass1 = pass1ET.getText().toString();
         final String pass2 = pass2ET.getText().toString();
-
-        textView.setOnClickListener(new View.OnClickListener(){
+        
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 //odkomentowac, gdy bedzie juz mozliwosc rejestracji
 //                boolean log = register(firstname, surname, email, pass1, pass2);
@@ -51,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
 //                    error.setText("Incorrect data. Try again.");
 //                    startActivity(intent);
 //                }
-
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
             }
         });
     }

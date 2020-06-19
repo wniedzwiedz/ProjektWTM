@@ -10,7 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.regex.Pattern;
+import com.example.projektwtm.modele.User;
+
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import javax.ws.rs.core.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -37,35 +46,53 @@ public class LoginActivity extends AppCompatActivity {
         Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-//odkomentowac, gdy bedzie juz mozliwosc logowania
-//                boolean log = login(femail, pass);
-//                if (log) {
-//                    Intent intent = new Intent(LoginActivity.this, MainPage.class);
-//                    TextView error = findViewById(R.id.textView11);
-//                    error.setText("");
-//                    startActivity(intent);
-//                }
-//                else {
-//                    Intent intent = new Intent(LoginActivity.this, LoginActivity.this);
-//                    TextView error = findViewById(R.id.textView11);
-//                    error.setText("Incorrect data. Try again.");
-//                    startActivity(intent);
-//                }
-                Intent intent = new Intent(LoginActivity.this, MainPage.class);
-                startActivity(intent);
+                boolean log = false;
+                try {
+                    log = login(email, pass);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (log) {
+                    Intent intent = new Intent(LoginActivity.this, MainPage.class);
+                    TextView error = findViewById(R.id.textView11);
+                    error.setText("");
+                    startActivity(intent);
+                }
+                else {
+                    //Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                    TextView error = findViewById(R.id.textView11);
+                    error.setText("Incorrect data. Try again.");
+                    //startActivity(intent);
+                }
+               // Intent intent = new Intent(LoginActivity.this, MainPage.class);
+              //  startActivity(intent);
             }
         });
 
     }
 
-    public boolean login(String email, String pass) {
+    public boolean login(String email, String pass) throws JSONException {
         if (email.equals("") || pass.equals("")) {
             return false;
         }
 
-        //sprawdzenie w bazie danych
+        ResteasyClient client = new ResteasyClientBuilder().build();
+        ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users");
+        Response response = target.request().get();
+        if (response.hasEntity()) {
+            JSONArray users = (JSONArray) response.getEntity();
+            for (int i = 0; i < users.length(); ++i) {
+                JSONObject obj = users.getJSONObject(i);
+                String emailJSON = obj.getString("email");
+                String passJSON = obj.getString("passwordHash");
+                if (email.equals(emailJSON) && pass.equals(passJSON)) {
+                    return true;
+                }
+            }
+        }
+        response.close();
 
-        return true;
+        return false;
     }
 
 }

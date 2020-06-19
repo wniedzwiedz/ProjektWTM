@@ -13,6 +13,7 @@ public class SpecificUserFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //podmiana fragmentu na widok konta danego uzytkownika
         return inflater.inflate(R.layout.fragment_specific_user, container, false);
     }
 }

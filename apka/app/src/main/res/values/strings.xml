@@ -88,4 +88,5 @@
     <string name="passAgain">Password again</string>
     <string name="updateGroup">UPDATE</string>
     <string name="errorGroupModify">" "</string>
+    <string name="AddButton">Add</string>
 </resources>

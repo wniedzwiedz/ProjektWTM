@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
@@ -21,6 +22,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/INDEX.LIST'
     }
 
 }
@@ -34,5 +40,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
+
+    implementation group: 'org.jboss.resteasy', name: 'resteasy-client', version: '3.0.19.Final'
+
+
+//    implementation 'org.jboss.resteasy:jaxrs-api:3.0.12.Final'
+//    implementation 'org.jboss.resteasy:resteasy-undertow:3.0.19.Final'
+//    implementation 'org.jboss.resteasy:resteasy-jackson-provider:3.0.19.Final'
 }
+

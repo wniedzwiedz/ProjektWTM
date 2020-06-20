@@ -15,51 +15,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView33"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:text="@string/personLoginVal"
+                android:textColor="@android:color/background_dark" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="263dp"
-                    android:layout_height="133dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/imageText"
-                    app:srcCompat="@drawable/ic_photo_library_black_24dp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/textView33"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="44dp"
-                        android:text="@string/personLoginVal"
-                        android:textColor="@android:color/background_dark"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/textView35"
-                        android:layout_width="40dp"
-                        android:layout_height="21dp"
-                        android:text="@string/personLoginText"
-                        android:textColor="@android:color/background_dark"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView33"
-                        app:layout_constraintVertical_bias="0.0" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/personLoginText"
+                android:textColor="@android:color/background_dark" />
 
             <TextView
                 android:id="@+id/textView36"

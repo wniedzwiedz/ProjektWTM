@@ -1,8 +1,15 @@
 package com.example.projektwtm;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -22,6 +29,7 @@ import org.json.JSONObject;
 import javax.ws.rs.core.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +53,37 @@ public class LoginActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener(){
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             public void onClick(View v){
-                boolean log = false;
-                try {
-                    log = login(email, pass);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                boolean log = true;
+//                try {
+//                    log = login(email, pass);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
                 if (log) {
+                    //push notification
+
+                    NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        CharSequence name = "Login";
+                        String description = "Login - push notification";
+                        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                        NotificationChannel channel = new NotificationChannel("ID", name, importance);
+                        channel.setDescription(description);
+                        notificationManager = context.getSystemService(NotificationManager.class);
+                        notificationManager.createNotificationChannel(channel);
+                    }
+
+                    NotificationCompat.Builder notification = new NotificationCompat.Builder(context, context.getString(R.string.app_name))
+                            .setChannelId("ID")
+                            .setContentTitle("Login")
+                            .setContentText("You have logged in. Enjoy your time!")
+                            .setSmallIcon(R.drawable.ic_launcher_foreground);
+                    
+                    notificationManager.notify(100, notification.build());
+
                     Intent intent = new Intent(LoginActivity.this, MainPage.class);
                     TextView error = findViewById(R.id.textView11);
                     error.setText("");

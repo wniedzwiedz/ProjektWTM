@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.regex.Pattern;
 
@@ -19,14 +22,16 @@ public class YourGroupFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        
+
         //uzupelnienie danych grupy
         TextView groupname = getView().findViewById(R.id.textView36);
         TextView packageame = getView().findViewById(R.id.textView24);
         TextView payment = getView().findViewById(R.id.textView26);
         TextView membersCount = getView().findViewById(R.id.textView28);
         LinearLayout linearLayout = getView().findViewById(R.id.linearLayout2);
-        
+        TextView error = getView().findViewById(R.id.textView50);
+        ImageView image = getView().findViewById(R.id.imageView);
+
         Button button = getView().findViewById(R.id.button12);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -60,6 +65,7 @@ public class YourGroupFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 //usuniecie grupy - REST
+                //podmiana fragmentu na widok grup uzytkownika - R.layout.fragment_search_groups
             }
             });
 

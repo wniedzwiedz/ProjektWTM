@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.regex.Pattern;
@@ -18,6 +19,14 @@ public class YourGroupFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        
+        //uzupelnienie danych grupy
+        TextView groupname = getView().findViewById(R.id.textView36);
+        TextView packageame = getView().findViewById(R.id.textView24);
+        TextView payment = getView().findViewById(R.id.textView26);
+        TextView membersCount = getView().findViewById(R.id.textView28);
+        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout2);
+        
         Button button = getView().findViewById(R.id.button12);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -33,7 +42,7 @@ public class YourGroupFragment extends Fragment {
                 final String login = loginET.getText().toString();
                 final String pass1 = pass1ET.getText().toString();
                 final String pass2 = pass2ET.getText().toString();
-                
+
                 boolean change = changeGroup(paymentDeadline, accountNumber, login, pass1, pass2);
                 if (change) {
                     //aktualizacja informacji o grupie - REST
@@ -46,17 +55,17 @@ public class YourGroupFragment extends Fragment {
                 }
             }
         });
-        
+
         Button button1 = getView().findViewById(R.id.button5);
         button1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 //usuniecie grupy - REST
             }
             });
-        
+
         return inflater.inflate(R.layout.fragment_your_group, container, false);
     }
-    
+
     public boolean changeGroup(String paymentDeadline, String accountNumber, String login, String pass1, String pass2) {
         if (paymentDeadline.equals("") || accountNumber.equals("") || login.equals("") || pass1.equals("") || pass2.equals("")) {
             return false;

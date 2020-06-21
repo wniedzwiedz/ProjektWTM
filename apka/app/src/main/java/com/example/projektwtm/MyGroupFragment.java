@@ -13,7 +13,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MyGroupFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -24,20 +29,50 @@ public class MyGroupFragment extends Fragment {
         TextView deadline = getView().findViewById(R.id.textView2);
         TextView bank = getView().findViewById(R.id.textView21);
         TextView membersCount = getView().findViewById(R.id.textView28);
-        TextView login = getView().findViewById(R.id.textView23);
-        TextView password = getView().findViewById(R.id.textView31);
+        TextView info = getView().findViewById(R.id.textView23);
 
         ImageView image = getView().findViewById(R.id.imageView);
 
-        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout6);
-        //dodanie czlonkow do linear layout
-
-       Button button = getView().findViewById(R.id.button5);
-       button.setOnClickListener(new View.OnClickListener(){
-        public void onClick(View v) {
-            //usuniecie uzytkownika z grupy
-            //podmiana fragmentu na widok grup uzytkownika
+        try {
+            groupname.setText(SearchGroupsFragment.group.getString("name"));
+            bank.setText(SearchGroupsFragment.group.getString("bankAccountNumber"));
+            info.setText(SearchGroupsFragment.group.getString("login"));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+
+        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout6);
+        JSONArray members = null;
+        try {
+            members = SearchGroupsFragment.group.getJSONArray("usersInGroups");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //dodanie czlonkow do linear layout
+        if (members != null) {
+            for (int i = 0; i < members.length(); i++) {
+                JSONObject member = null;
+                try {
+                    member = members.getJSONObject(i).getJSONObject("user");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                TextView textView = null;
+                try {
+                    textView.setText(member.getString("login"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                linearLayout.addView(textView);
+            }
+        }
+
+        Button button = getView().findViewById(R.id.button5);
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                //usuniecie uzytkownika z grupy
+                //podmiana fragmentu na widok grup uzytkownika
+            }
         });
 
         return inflater.inflate(R.layout.fragment_my_group, container, false);

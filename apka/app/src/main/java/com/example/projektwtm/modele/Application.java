@@ -1,11 +1,18 @@
 package com.example.projektwtm.modele;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Application {
+@DatabaseTable(tableName = "application_entity")
+public class Application implements Serializable {
 
+    @DatabaseField(columnName = "id")
     private int id;
 
+    @DatabaseField(columnName = "name")
     private String name;
 
     private List<Package> packages;

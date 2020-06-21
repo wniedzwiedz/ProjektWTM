@@ -1,18 +1,28 @@
 package com.example.projektwtm.modele;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+@DatabaseTable(tableName = "user_entity")
+public class User implements Serializable {
 
+    @DatabaseField(columnName = "id")
     private int id;
 
+    @DatabaseField(columnName = "first_name")
     private String firstName;
 
+    @DatabaseField(columnName = "last_name")
     private String lastName;
 
+    @DatabaseField(columnName = "password_hash")
     private String passwordHash;
 
+    @DatabaseField(columnName = "email")
     private String email;
 
     List<Payment> payments;

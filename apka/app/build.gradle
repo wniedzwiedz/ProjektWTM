@@ -44,6 +44,9 @@ dependencies {
 
     implementation group: 'org.jboss.resteasy', name: 'resteasy-client', version: '3.0.19.Final'
 
+    // Dependency for ORMLite
+    implementation 'com.j256.ormlite:ormlite-android:4.48'
+    implementation 'com.j256.ormlite:ormlite-core:4.48'
 
 //    implementation 'org.jboss.resteasy:jaxrs-api:3.0.12.Final'
 //    implementation 'org.jboss.resteasy:resteasy-undertow:3.0.19.Final'

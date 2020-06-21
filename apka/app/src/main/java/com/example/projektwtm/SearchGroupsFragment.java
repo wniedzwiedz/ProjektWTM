@@ -76,9 +76,6 @@ public class SearchGroupsFragment extends Fragment {
         });
 
 
-
-
-
         return inflater.inflate(R.layout.fragment_search_groups, container, false);
     }
 }

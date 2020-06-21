@@ -1,30 +1,47 @@
 package com.example.projektwtm.modele;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Group {
+@DatabaseTable(tableName = "group_entity")
+public class Group implements Serializable {
 
+    @DatabaseField(id = true, canBeNull = false, columnName = "id")
     private int id;
 
+    @DatabaseField(columnName = "name")
     private String name;
 
+    @DatabaseField(columnName = "bank_account_number")
     private String bankAccountNumber;
 
+    @DatabaseField(columnName = "max_number_of_members")
     private int maxNumberOfMembers;
 
+    @DatabaseField(columnName = "login_hash")
     private String loginHash;
 
+    @DatabaseField(columnName = "password_hash")
     private String passwordHash;
 
+    @DatabaseField(columnName = "group_hash")
     private String groupHash;
 
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Package aPackage;
 
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private User owner;
 
     private List<Payment> payments;
 
     private List<UserInGroup> userInGroups;
+
+    public Group() {
+    }
 
     public int getId() {
         return id;

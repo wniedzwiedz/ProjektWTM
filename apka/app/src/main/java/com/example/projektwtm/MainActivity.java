@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -32,6 +33,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private IntentFilter filter = new IntentFilter("android.password.wrong");
     private IntentFilter filter2 = new IntentFilter("android.intent.action.BATTERY_LOW");
 
-    private BroadcastReceiver broadcast = new BroadcastReceiver(){
+    private BroadcastReceiver broadcast = new BroadcastReceiver() {
         @Override
         public void onReceive(Context arg0, Intent arg1) {
             Toast.makeText(arg0, "Wrong password!", Toast.LENGTH_LONG).show();
@@ -66,6 +70,19 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(broadcast2, filter2);
         setContentView(R.layout.activity_main);
 
+        // check if logged
+        DBHelper dbHelper = new DBHelper(this);
+        List users = new ArrayList<>();
+        try {
+            users.addAll(dbHelper.getUser(User.class));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (!users.isEmpty()) {
+            Intent intent = new Intent(this, MainPage.class);
+            startActivity(intent);
+        }
 
         TextView textView = findViewById(R.id.textView8);
         textView.setText(Html.fromHtml("<font color='black'><u>" + getResources().getString(R.string.linkLogin) + "</u></font>"));
@@ -182,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
                                 response.append(responseLine.trim());
                             }
                             System.out.println(response.toString());
-                            // save user to sqlLite
 
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             error.setText("");
@@ -204,24 +220,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-//        ResteasyClient client = new ResteasyClientBuilder().build();
-//        ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/");
-//        Response response = target.request().get();
-//        if (response.hasEntity()) {
-//            JSONArray users = (JSONArray) response.getEntity();
-//            for (int i = 0; i < users.length(); ++i) {
-//                JSONObject obj = users.getJSONObject(i);
-//                String emailJSON = obj.getString("email");
-//                if (email.equals(emailJSON)) {
-//                    return false;
-//                }
-//            }
-//        }
-//        response.close();
-
-//        return true;
     }
 
     @Override

@@ -41,7 +41,7 @@ public class SearchAppsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final LinearLayout linearLayout = getView().findViewById(R.id.linearLayout5);
+//        final LinearLayout linearLayout = getView().findViewById(R.id.linearLayout5);
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -66,7 +66,7 @@ public class SearchAppsFragment extends Fragment {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 TextView text = null;
                                 text.setText(jsonObject.getString("name"));
-                                linearLayout.addView(text);
+//                                linearLayout.addView(text);
                             }
                         }
                     } catch (IOException e) {

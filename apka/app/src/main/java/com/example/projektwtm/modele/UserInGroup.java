@@ -1,15 +1,26 @@
 package com.example.projektwtm.modele;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-public class UserInGroup {
+import java.io.Serializable;
 
+@DatabaseTable(tableName = "user_in_group")
+public class UserInGroup implements Serializable {
+
+//    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private UserInGroupId id;
 
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private User user;
 
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Group group;
 
     private boolean isConfirmed;
+
+    public UserInGroup() {
+    }
 
     public UserInGroupId getId() {
         return id;

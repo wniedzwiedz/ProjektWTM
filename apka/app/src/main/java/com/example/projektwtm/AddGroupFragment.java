@@ -45,8 +45,6 @@ public class AddGroupFragment extends Fragment {
         paymentDeadlineET = getView().findViewById(R.id.editText);
         accountNumberET = getView().findViewById(R.id.editText8);
         loginET = getView().findViewById(R.id.editText13);
-        pass1ET = getView().findViewById(R.id.editText14);
-        pass2ET = getView().findViewById(R.id.editText15);
 
         final String paymentDeadline = paymentDeadlineET.getText().toString();
         final String accountNumber = accountNumberET.getText().toString();
@@ -85,19 +83,7 @@ public class AddGroupFragment extends Fragment {
 //
 //        }
 
-
-        final String passwordHash;
-        try {
-            passwordHash = Encryption.encryptText(pass1);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            error.setText("Incorrect data. Try again.");
-            return;
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-            error.setText("Incorrect data. Try again.");
-            return;
-        }
+        
 
         AsyncTask.execute(new Runnable() {
             @SuppressLint("ResourceType")
@@ -112,9 +98,8 @@ public class AddGroupFragment extends Fragment {
                     myConnection.setDoOutput(true);
 
 
-                    String jsonInputString = "{\"firstName\" : \"" + paymentDeadline + "\", " +
-                            "\"bankAccountNumber\" : \"" + accountNumber + "\", " +
-                            "\"passwordHash\" : \"" + passwordHash + "\"}";
+                    String jsonInputString = "{\"login\" : \"" + login + "\", " +
+                            "\"bankAccountNumber\" : \"" + accountNumber + "\"}";
 
                     try {
                         OutputStream os = myConnection.getOutputStream();

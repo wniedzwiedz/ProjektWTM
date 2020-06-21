@@ -1,6 +1,7 @@
 package com.example.projektwtm;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -16,21 +17,38 @@ import android.widget.TextView;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.json.JSONException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.regex.Pattern;
 
 import javax.ws.rs.core.Response;
 
 public class SettingsFragment extends Fragment {
+
+    EditText firstnameET;
+    EditText surnameET;
+    EditText emailET;
+    EditText pass1ET;
+    EditText pass2ET;
+
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        EditText firstnameET = getView().findViewById(R.id.editText12);
-        EditText surnameET = getView().findViewById(R.id.editText16);
-        EditText emailET = getView().findViewById(R.id.editText17);
-        EditText pass1ET = getView().findViewById(R.id.editText11);
-        EditText pass2ET = getView().findViewById(R.id.editText10);
+        firstnameET = getView().findViewById(R.id.editText12);
+        surnameET = getView().findViewById(R.id.editText16);
+        emailET = getView().findViewById(R.id.editText17);
+        pass1ET = getView().findViewById(R.id.editText11);
+        pass2ET = getView().findViewById(R.id.editText10);
 
         final String firstname = firstnameET.getText().toString();
         final String surname = surnameET.getText().toString();
@@ -41,138 +59,344 @@ public class SettingsFragment extends Fragment {
         Button button = getView().findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                boolean nameChange = changeFirstname(firstname);
-                if (nameChange) {
-                    TextView error = getView().findViewById(R.id.textView48);
-                    error.setText("");
+                final String firstname = firstnameET.getText().toString();
 
-                    ResteasyClient client = new ResteasyClientBuilder().build();
-                    ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/"); // + user.getId()
-                    //user.setFirstname(firstname);
-                    Response response = target.request().get(); //.put(user);
-                    response.close();
-                }
-                else {
-                    TextView error = getView().findViewById(R.id.textView48);
-                    error.setText("Incorrect data. Try again.");
-                }
+                changeFirstname(firstname);
             }
         });
 
         Button button1 = getView().findViewById(R.id.button7);
         button1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                boolean surnameChange = changeSurname(surname);
-                if (surnameChange) {
-                    TextView error = getView().findViewById(R.id.textView48);
-                    error.setText("");
+                final String surname = surnameET.getText().toString();
 
-                    ResteasyClient client = new ResteasyClientBuilder().build();
-                    ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/"); // + user.getId()
-                    //user.setSurname(surname);
-                    Response response = target.request().get(); //.put(user);
-                    response.close();
-                }
-                else {
-                    TextView error = getView().findViewById(R.id.textView48);
-                    error.setText("Incorrect data. Try again.");
-                }
+                changeSurname(surname);
             }
         });
 
         Button button2 = getView().findViewById(R.id.button9);
         button2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                boolean emailChange = changeEmail(email);
-                if (emailChange) {
-                    TextView error = getView().findViewById(R.id.textView48);
-                    error.setText("");
+                final String email = emailET.getText().toString();
 
-                    ResteasyClient client = new ResteasyClientBuilder().build();
-                    ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/"); // + user.getId()
-                    //user.setEmail(email);
-                    Response response = target.request().get(); //.put(user);
-                    response.close();
-                }
-                else {
-                    TextView error = getView().findViewById(R.id.textView48);
-                    error.setText("Incorrect data. Try again.");
-                }
+                changeEmail(email);
             }
         });
 
         Button button3 = getView().findViewById(R.id.button10);
         button3.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                boolean passChange = changePassword(pass1, pass2);
-                if (passChange) {
-                    TextView error = getView().findViewById(R.id.textView48);
-                    error.setText("");
+                final String pass1 = pass1ET.getText().toString();
+                final String pass2 = pass2ET.getText().toString();
 
-                    ResteasyClient client = new ResteasyClientBuilder().build();
-                    ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/"); // + user.getId()
-                    //user.setPasswordHash(pass1);
-                    Response response = target.request().get(); //.put(user);
-                    response.close();
-                }
-                else {
-                    TextView error = getView().findViewById(R.id.textView48);
-                    error.setText("Incorrect data. Try again.");
-                }
+                changePassword(pass1, pass2);
             }
         });
 
         Button button4 = getView().findViewById(R.id.button11);
         button4.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+                //wylogowanie
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
-            });
+        });
 
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
-    public boolean changeFirstname(String firstname) {
+    public void changeFirstname(final String firstname) {
+        TextView error = getView().findViewById(R.id.textView48);
+
         if (firstname.equals("")) {
-            return false;
+            error.setText("Empty firstname");
+            return;
         }
         else if (!Pattern.matches("[A-Z][a-z]+", firstname)) {
-            return false;
+            error.setText("Incorrect firstname.");
         }
-        return true;
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL addUserURL = new URL("http://" + Constants.serverIP + ":8080/FindCo/api/users/" + LoginActivity.loggedUser.getInt("id"));
+                    HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
+                    myConnection.setRequestMethod("PUT");
+                    myConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+                    myConnection.setRequestProperty("Accept", "application/json");
+                    myConnection.setDoOutput(true);
+
+                    String jsonInputString = "{\"firstName\" : \"" + firstname + "\", " +
+                            "\"lastName\" : \"" + LoginActivity.loggedUser.getString("lastName") + "\", " +
+                            "\"email\" : \"" + LoginActivity.loggedUser.getString("email") + "\", " +
+                            "\"passwordHash\" : \"" + LoginActivity.loggedUser.getString("passwordHash") + "\"}";
+
+                    try {
+                        OutputStream os = myConnection.getOutputStream();
+                        byte[] input = jsonInputString.getBytes("utf-8");
+                        os.write(input, 0, input.length);
+                        os.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    BufferedReader bufferedReader = null;
+                    try {
+                        TextView error = getView().findViewById(R.id.textView48);
+
+                        if (myConnection.getResponseCode() == 200) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(myConnection.getInputStream(), "utf-8"));
+                            StringBuilder response = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = bufferedReader.readLine()) != null) {
+                                response.append(responseLine.trim());
+                            }
+                            System.out.println(response.toString());
+                            // save user to sqlLite
+
+                            error.setText("Firstname changed.");
+                        } else if (myConnection.getResponseCode() == 400) {
+                            error.setText("Wrong number format.");
+                        } else {
+                            error.setText("Server error.");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
     }
 
-    public boolean changeSurname(String surname) {
+    public void changeSurname(final String surname) {
+        TextView error = getView().findViewById(R.id.textView48);
+
         if (surname.equals("")) {
-            return false;
+            error.setText("Empty surname.");
+            return;
         }
         else if (!Pattern.matches("[A-Z][a-z]+", surname)) {
-            return false;
+            error.setText("Incorrect surname.");
         }
-        return true;
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL addUserURL = new URL("http://" + Constants.serverIP + ":8080/FindCo/api/users/" + LoginActivity.loggedUser.getInt("id"));
+                    HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
+                    myConnection.setRequestMethod("PUT");
+                    myConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+                    myConnection.setRequestProperty("Accept", "application/json");
+                    myConnection.setDoOutput(true);
+
+                    String jsonInputString = "{\"firstName\" : \"" + LoginActivity.loggedUser.getString("firstName") + "\", " +
+                            "\"lastName\" : \"" + surname + "\", " +
+                            "\"email\" : \"" + LoginActivity.loggedUser.getString("email") + "\", " +
+                            "\"passwordHash\" : \"" + LoginActivity.loggedUser.getString("passwordHash") + "\"}";
+
+                    try {
+                        OutputStream os = myConnection.getOutputStream();
+                        byte[] input = jsonInputString.getBytes("utf-8");
+                        os.write(input, 0, input.length);
+                        os.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    BufferedReader bufferedReader = null;
+                    try {
+                        TextView error = getView().findViewById(R.id.textView48);
+
+                        if (myConnection.getResponseCode() == 200) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(myConnection.getInputStream(), "utf-8"));
+                            StringBuilder response = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = bufferedReader.readLine()) != null) {
+                                response.append(responseLine.trim());
+                            }
+                            System.out.println(response.toString());
+                            // save user to sqlLite
+
+                            error.setText("Surname changed.");
+                        } else if (myConnection.getResponseCode() == 400) {
+                            error.setText("Wrong number format.");
+                        } else {
+                            error.setText("Server error.");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
-    public boolean changeEmail(String email) {
+    public void changeEmail(final String email) {
+        TextView error = getView().findViewById(R.id.textView48);
+
         if (email.equals("")) {
-            return false;
+            error.setText("Empty email.");
+            return;
         }
-        //else if (!Pattern.matches("[A-Za-z]+[1-9_]*[@]{1}[A-Za-z1-9]+[.]{1}[a-z]+[.]{0,1}[a-z]+}", email)) {
-          //  return false;
-        //}
-        return true;
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL addUserURL = new URL("http://" + Constants.serverIP + ":8080/FindCo/api/users/" + LoginActivity.loggedUser.getInt("id"));
+                    HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
+                    myConnection.setRequestMethod("PUT");
+                    myConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+                    myConnection.setRequestProperty("Accept", "application/json");
+                    myConnection.setDoOutput(true);
+
+                    String jsonInputString = "{\"firstName\" : \"" + LoginActivity.loggedUser.getString("firstName") + "\", " +
+                            "\"lastName\" : \"" + LoginActivity.loggedUser.getString("lastName") + "\", " +
+                            "\"email\" : \"" + email + "\", " +
+                            "\"passwordHash\" : \"" + LoginActivity.loggedUser.getString("passwordHash") + "\"}";
+
+                    try {
+                        OutputStream os = myConnection.getOutputStream();
+                        byte[] input = jsonInputString.getBytes("utf-8");
+                        os.write(input, 0, input.length);
+                        os.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    BufferedReader bufferedReader = null;
+                    try {
+                        TextView error = getView().findViewById(R.id.textView48);
+
+                        if (myConnection.getResponseCode() == 200) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(myConnection.getInputStream(), "utf-8"));
+                            StringBuilder response = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = bufferedReader.readLine()) != null) {
+                                response.append(responseLine.trim());
+                            }
+                            System.out.println(response.toString());
+                            // save user to sqlLite
+
+                            error.setText("Email changed.");
+                        } else if (myConnection.getResponseCode() == 400) {
+                            error.setText("Wrong number format.");
+                        } else {
+                            error.setText("Server error.");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
-    public boolean changePassword(String pass1, String pass2) {
+    public void changePassword(final String pass1, String pass2) {
+        final TextView error = getView().findViewById(R.id.textView48);
+
         if (pass1.equals("") || pass2.equals("")) {
-            return false;
+            error.setText("Empty password.");
         }
         else if (!pass1.equals(pass2)) {
-            return false;
+            error.setText("Passwords are not the same.");
         }
-        else if (!Pattern.matches("[A-Za-z1-9_!@]+", pass1)  || !Pattern.matches("[A-Za-z1-9_!@]+", pass2)) {
-            return false;
-        }
-        return true;
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL addUserURL = new URL("http://" + Constants.serverIP + ":8080/FindCo/api/users/" + LoginActivity.loggedUser.getInt("id"));
+                    HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
+                    myConnection.setRequestMethod("PUT");
+                    myConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+                    myConnection.setRequestProperty("Accept", "application/json");
+                    myConnection.setDoOutput(true);
+
+                    final String passwordHash;
+                    try {
+                        passwordHash = Encryption.encryptText(pass1);
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                        error.setText("Incorrect data. Try again.");
+                        return;
+                    } catch (InvalidKeySpecException e) {
+                        e.printStackTrace();
+                        error.setText("Incorrect data. Try again.");
+                        return;
+                    }
+
+                    String jsonInputString = "{\"firstName\" : \"" + LoginActivity.loggedUser.getString("firstName") + "\", " +
+                            "\"lastName\" : \"" + LoginActivity.loggedUser.getString("lastName") + "\", " +
+                            "\"email\" : \"" + LoginActivity.loggedUser.getString("email") + "\", " +
+                            "\"passwordHash\" : \"" + passwordHash + "\"}";
+
+                    try {
+                        OutputStream os = myConnection.getOutputStream();
+                        byte[] input = jsonInputString.getBytes("utf-8");
+                        os.write(input, 0, input.length);
+                        os.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    BufferedReader bufferedReader = null;
+                    try {
+                        TextView error = getView().findViewById(R.id.textView48);
+
+                        if (myConnection.getResponseCode() == 200) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(myConnection.getInputStream(), "utf-8"));
+                            StringBuilder response = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = bufferedReader.readLine()) != null) {
+                                response.append(responseLine.trim());
+                            }
+                            System.out.println(response.toString());
+                            // save user to sqlLite
+
+                            error.setText("Password changed.");
+                        } else if (myConnection.getResponseCode() == 400) {
+                            error.setText("Wrong number format.");
+                        } else {
+                            error.setText("Server error.");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
     }
 }

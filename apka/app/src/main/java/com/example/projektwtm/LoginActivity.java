@@ -4,7 +4,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -20,12 +19,18 @@ import android.widget.TextView;
 
 import com.example.projektwtm.modele.User;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,9 +70,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        final String email = emailET.getText().toString();
-        final String pass = passET.getText().toString();
-
         Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -85,24 +87,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void login(final String email, String pass) throws JSONException {
+    public void login(final String email, final String pass) throws JSONException {
         TextView error = findViewById(R.id.textView11);
 
         if (email.equals("") || pass.equals("")) {
             error.setText("All data required. Try again.");
-        }
-
-        final String passwordHash;
-        try {
-            passwordHash = Encryption.encryptText(pass);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            error.setText("Incorrect data. Try again.");
-            return;
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-            error.setText("Incorrect data. Try again.");
-            return;
         }
 
         AsyncTask.execute(new Runnable() {
@@ -127,9 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String emailJSON = jsonObject.getString("email");
-                                String pass = jsonObject.getString("passwordHash");
-                                if (emailJSON.equals(email) && pass.equals(passwordHash))
-                                {
+                                String passJSON = jsonObject.getString("passwordHash");
+                                if (emailJSON.equals(email) && Encryption.validatePassword(pass, passJSON)) {
 
                                     loggedUser = jsonObject;
 
@@ -163,6 +151,10 @@ public class LoginActivity extends AppCompatActivity {
                         e.printStackTrace();
                     } catch (JSONException e) {
                         e.printStackTrace();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    } catch (InvalidKeySpecException e) {
+                        e.printStackTrace();
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -172,8 +164,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
 }

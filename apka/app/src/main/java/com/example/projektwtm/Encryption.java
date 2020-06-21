@@ -97,7 +97,7 @@ public class Encryption {
         return bytes;
     }
 
-    private static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException
+    public static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         String[] parts = storedPassword.split(":");
         int iterations = Integer.parseInt(parts[0]);
@@ -113,6 +113,12 @@ public class Encryption {
         {
             diff |= hash[i] ^ testHash[i];
         }
+        Intent intent = new Intent();
+        intent.setAction("android.password.wrong");
+        if (diff!=0){
+            sendBroadcast(intent);
+        }
+
         return diff == 0;
     }
 }

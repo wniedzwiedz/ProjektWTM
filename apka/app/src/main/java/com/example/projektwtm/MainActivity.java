@@ -2,10 +2,11 @@ package com.example.projektwtm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -17,6 +18,10 @@ import android.widget.Toast;
 
 import com.example.projektwtm.modele.User;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
@@ -38,18 +43,28 @@ public class MainActivity extends AppCompatActivity {
     EditText pass1ET;
     EditText pass2ET;
 
+    private IntentFilter filter = new IntentFilter("android.password.wrong");
+
+    private BroadcastReceiver broadcast = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context arg0, Intent arg1) {
+            Toast.makeText(arg0, "Wrong password!", Toast.LENGTH_LONG).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerReceiver(broadcast, filter);
         setContentView(R.layout.activity_main);
 
         // check if logged
-        DBHelper dbHelper = new DBHelper(this);
-        Cursor user = dbHelper.getUser();
-        if (user.moveToNext()) {
-            Intent intent = new Intent(MainActivity.this, MainPage.class);
-            startActivity(intent);
-        }
+//        DBHelper dbHelper = new DBHelper(this);
+//        Cursor user = dbHelper.getUser();
+//        if (user.moveToNext()) {
+//            Intent intent = new Intent(MainActivity.this, MainPage.class);
+//            startActivity(intent);
+//        }
 
         TextView textView = findViewById(R.id.textView8);
         textView.setText(Html.fromHtml("<font color='black'><u>" + getResources().getString(R.string.linkLogin) + "</u></font>"));
@@ -167,17 +182,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                             System.out.println(response.toString());
 
-//                            // move to login activity
-//                            // save user to sqlLite
-//                            DBHelper dbHelper = new DBHelper(getApplicationContext(), DBHelper.USER_TABLE_NAME, null, 1);
-//                            SQLiteDatabase writableDatabase = dbHelper.getWritableDatabase();
-//                            ContentValues contentValues = new ContentValues();
-//                            contentValues.put("firstname", firstname);
-//                            contentValues.put("surname", surname);
-//                            writableDatabase.insertOrThrow(DBHelper.USER_TABLE_NAME, null, contentValues);
-//                            Toast toast = Toast.makeText(getApplicationContext(), "Logged", Toast.LENGTH_SHORT);
-//                            toast.show();
-
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             error.setText("");
                             startActivity(intent);
@@ -198,23 +202,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    public void onPause() {
+        unregisterReceiver(broadcast);
+        // trzeba zawsze po sobie posprzątać w tym przypadku wyrejestrować receiver.
+        super.onPause();
+    }
 
-//        ResteasyClient client = new ResteasyClientBuilder().build();
-//        ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/");
-//        Response response = target.request().get();
-//        if (response.hasEntity()) {
-//            JSONArray users = (JSONArray) response.getEntity();
-//            for (int i = 0; i < users.length(); ++i) {
-//                JSONObject obj = users.getJSONObject(i);
-//                String emailJSON = obj.getString("email");
-//                if (email.equals(emailJSON)) {
-//                    return false;
-//                }
-//            }
-//        }
-//        response.close();
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(broadcast, filter);
 
-//        return true;
     }
 }

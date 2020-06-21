@@ -89,4 +89,5 @@
     <string name="updateGroup">UPDATE</string>
     <string name="errorGroupModify">" "</string>
     <string name="AddButton">Add</string>
+    <string name="InfoText">Information</string>
 </resources>

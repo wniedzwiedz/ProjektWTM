@@ -24,17 +24,17 @@ public class SearchGroupsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout4);
-        Button button = getView().findViewById(R.id.fab);
+//        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout4);
+//        Button button = getView().findViewById(R.id.fab);
         
         //gdy wyswietlamy dla grup uzytkownika - przycisk sie nie wyswietla/jest nieaktywny
         //gdy dla grup w ramach pakietu - wyswietla sie i sluzy do dodania grupy w ramach pakietu
 
-        button.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                //podmiana fragmentu na fragment R.layout.fragment_add_group
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v) {
+//                //podmiana fragmentu na fragment R.layout.fragment_add_group
+//            }
+//        });
         
 //        //w przypadku, gdy uzywamy tego do wyswietlenia grup uzytkownika
 //        ResteasyClient client = new ResteasyClientBuilder().build();

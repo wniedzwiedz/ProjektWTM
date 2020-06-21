@@ -10,7 +10,7 @@ import java.util.List;
 @DatabaseTable(tableName = "user_entity")
 public class User implements Serializable {
 
-    @DatabaseField(columnName = "id")
+    @DatabaseField(id = true, canBeNull = false, columnName = "id")
     private int id;
 
     @DatabaseField(columnName = "first_name")
@@ -30,6 +30,9 @@ public class User implements Serializable {
     List<Group> myGroups;
 
     List<UserInGroup> userInGroups;
+
+    public User() {
+    }
 
     public User(String firstName, String lastName, String email, String passwordHash) {
         this.firstName = firstName;

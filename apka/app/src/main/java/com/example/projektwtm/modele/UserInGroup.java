@@ -19,6 +19,9 @@ public class UserInGroup implements Serializable {
 
     private boolean isConfirmed;
 
+    public UserInGroup() {
+    }
+
     public UserInGroupId getId() {
         return id;
     }

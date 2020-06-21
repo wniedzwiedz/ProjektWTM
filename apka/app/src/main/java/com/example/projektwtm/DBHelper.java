@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.projektwtm.modele.Application;
 import com.example.projektwtm.modele.Group;
+import com.example.projektwtm.modele.Package;
 import com.example.projektwtm.modele.Payment;
 import com.example.projektwtm.modele.User;
 import com.example.projektwtm.modele.UserInGroup;
@@ -63,7 +64,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     }
 
-    public List<User> getUser() throws SQLException {
+    public List<User> getUser(Class<User> userClass) throws SQLException {
         Dao<User, ?> dao = getDao(User.class);
         return dao.queryForAll();
     }

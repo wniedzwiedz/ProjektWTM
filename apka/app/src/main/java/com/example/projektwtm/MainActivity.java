@@ -33,6 +33,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private IntentFilter filter = new IntentFilter("android.password.wrong");
 
-    private BroadcastReceiver broadcast = new BroadcastReceiver(){
+    private BroadcastReceiver broadcast = new BroadcastReceiver() {
         @Override
         public void onReceive(Context arg0, Intent arg1) {
             Toast.makeText(arg0, "Wrong password!", Toast.LENGTH_LONG).show();
@@ -59,12 +62,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // check if logged
-//        DBHelper dbHelper = new DBHelper(this);
-//        Cursor user = dbHelper.getUser();
-//        if (user.moveToNext()) {
-//            Intent intent = new Intent(MainActivity.this, MainPage.class);
-//            startActivity(intent);
-//        }
+        DBHelper dbHelper = new DBHelper(this);
+        List users = new ArrayList<>();
+        try {
+            users.addAll(dbHelper.getUser(User.class));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (!users.isEmpty()) {
+            Intent intent = new Intent(this, MainPage.class);
+            startActivity(intent);
+        }
 
         TextView textView = findViewById(R.id.textView8);
         textView.setText(Html.fromHtml("<font color='black'><u>" + getResources().getString(R.string.linkLogin) + "</u></font>"));

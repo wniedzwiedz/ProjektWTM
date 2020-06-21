@@ -9,13 +9,16 @@ import java.util.List;
 @DatabaseTable(tableName = "application_entity")
 public class Application implements Serializable {
 
-    @DatabaseField(columnName = "id")
+    @DatabaseField(id = true, canBeNull = false, columnName = "id")
     private int id;
 
     @DatabaseField(columnName = "name")
     private String name;
 
     private List<Package> packages;
+
+    public Application() {
+    }
 
     public int getId() {
         return id;

@@ -33,21 +33,21 @@ public class MyGroupFragment extends Fragment {
 
         ImageView image = getView().findViewById(R.id.imageView);
 
-        try {
-            groupname.setText(SearchGroupsFragment.group.getString("name"));
-            bank.setText(SearchGroupsFragment.group.getString("bankAccountNumber"));
-            info.setText(SearchGroupsFragment.group.getString("login"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            groupname.setText(SearchGroupsFragment.group.getString("name"));
+//            bank.setText(SearchGroupsFragment.group.getString("bankAccountNumber"));
+//            info.setText(SearchGroupsFragment.group.getString("login"));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         LinearLayout linearLayout = getView().findViewById(R.id.linearLayout6);
         JSONArray members = null;
-        try {
-            members = SearchGroupsFragment.group.getJSONArray("usersInGroups");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            members = SearchGroupsFragment.group.getJSONArray("usersInGroups");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         //dodanie czlonkow do linear layout
         if (members != null) {
             for (int i = 0; i < members.length(); i++) {

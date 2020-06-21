@@ -9,7 +9,7 @@ import java.util.List;
 @DatabaseTable(tableName = "group_entity")
 public class Group implements Serializable {
 
-    @DatabaseField(columnName = "id")
+    @DatabaseField(id = true, canBeNull = false, columnName = "id")
     private int id;
 
     @DatabaseField(columnName = "name")
@@ -39,6 +39,9 @@ public class Group implements Serializable {
     private List<Payment> payments;
 
     private List<UserInGroup> userInGroups;
+
+    public Group() {
+    }
 
     public int getId() {
         return id;

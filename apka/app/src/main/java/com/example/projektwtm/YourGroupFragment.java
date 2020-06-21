@@ -28,7 +28,7 @@ public class YourGroupFragment extends Fragment {
         TextView packageame = getView().findViewById(R.id.textView24);
         TextView payment = getView().findViewById(R.id.textView26);
         TextView membersCount = getView().findViewById(R.id.textView28);
-//        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout2);
+        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout2);
         TextView error = getView().findViewById(R.id.textView50);
         ImageView image = getView().findViewById(R.id.imageView);
 
@@ -39,25 +39,25 @@ public class YourGroupFragment extends Fragment {
                 EditText paymentDeadlineET = getView().findViewById(R.id.editText18);
                 EditText accountNumberET = getView().findViewById(R.id.editText19);
                 EditText loginET = getView().findViewById(R.id.editText20);
-                EditText pass1ET = getView().findViewById(R.id.editText21);
-                EditText pass2ET = getView().findViewById(R.id.editText22);
+//                EditText pass1ET = getView().findViewById(R.id.editText21);
+//                EditText pass2ET = getView().findViewById(R.id.editText22);
 
                 final String paymentDeadline = paymentDeadlineET.getText().toString();
                 final String accountNumber = accountNumberET.getText().toString();
                 final String login = loginET.getText().toString();
-                final String pass1 = pass1ET.getText().toString();
-                final String pass2 = pass2ET.getText().toString();
+//                final String pass1 = pass1ET.getText().toString();
+//                final String pass2 = pass2ET.getText().toString();
 
-                boolean change = changeGroup(paymentDeadline, accountNumber, login, pass1, pass2);
-                if (change) {
-                    //aktualizacja informacji o grupie - REST
-                    TextView error = getView().findViewById(R.id.textView50);
-                    error.setText("");
-                }
-                else {
-                    TextView error = getView().findViewById(R.id.textView50);
-                    error.setText("Incorrect data. Try again.");
-                }
+//                boolean change = changeGroup(paymentDeadline, accountNumber, login, pass1, pass2);
+//                if (change) {
+//                    //aktualizacja informacji o grupie - REST
+//                    TextView error = getView().findViewById(R.id.textView50);
+//                    error.setText("");
+//                }
+//                else {
+//                    TextView error = getView().findViewById(R.id.textView50);
+//                    error.setText("Incorrect data. Try again.");
+//                }
             }
         });
 

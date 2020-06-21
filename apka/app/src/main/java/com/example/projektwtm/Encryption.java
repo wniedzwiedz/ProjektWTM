@@ -1,4 +1,6 @@
 package com.example.projektwtm;
+import android.content.Intent;
+
 import java.math.BigInteger;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -116,7 +118,7 @@ public class Encryption {
         Intent intent = new Intent();
         intent.setAction("android.password.wrong");
         if (diff!=0){
-            sendBroadcast(intent);
+//            sendBroadcast(intent);
         }
 
         return diff == 0;

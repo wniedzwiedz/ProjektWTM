@@ -107,12 +107,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/groupPaymentDeadlineVal"
                 android:inputType="textPersonName"
                 android:text="@string/groupPaymentDeadlineVal"
-                android:textColor="@android:color/background_dark"
-                android:autofillHints="" />
+                android:textColor="@android:color/background_dark" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -171,45 +171,7 @@
                 android:id="@+id/textView30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/groupLoginText"
-                android:textColor="@android:color/background_dark" />
-
-            <EditText
-                android:id="@+id/editText21"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/groupPasswordVal"
-                android:inputType="textPassword"
-                android:text="@string/groupPasswordVal"
-                android:textColor="@android:color/background_dark"
-                android:autofillHints="" />
-
-            <TextView
-                android:id="@+id/textView32"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/groupPasswordText"
-                android:textColor="@android:color/background_dark" />
-
-            <EditText
-                android:id="@+id/editText22"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/groupPasswordVal"
-                android:inputType="textPassword"
-                android:textColor="@android:color/background_dark"
-                tools:text="@string/groupPasswordVal"
-                android:autofillHints="" />
-
-            <TextView
-                android:id="@+id/textView49"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/passAgain"
+                android:text="@string/InfoText"
                 android:textColor="@android:color/background_dark" />
 
             <TextView
@@ -221,6 +183,7 @@
                 android:textColor="@android:color/background_dark" />
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"></LinearLayout>

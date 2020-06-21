@@ -9,7 +9,7 @@ import java.util.List;
 @DatabaseTable(tableName = "package_entity")
 public class Package implements Serializable {
 
-    @DatabaseField(columnName = "id")
+    @DatabaseField(id = true, canBeNull = false, columnName = "id")
     private int id;
 
     @DatabaseField(columnName = "name")
@@ -19,6 +19,9 @@ public class Package implements Serializable {
     private Application application;
 
     private List<Group> groups;
+
+    public Package() {
+    }
 
     public int getId() {
         return id;

@@ -9,7 +9,7 @@ import java.util.Date;
 @DatabaseTable(tableName = "payment_entity")
 public class Payment implements Serializable {
 
-    @DatabaseField(columnName = "id")
+    @DatabaseField(id = true, canBeNull = false, columnName = "id")
     private int id;
 
     @DatabaseField(columnName = "deadline")
@@ -26,6 +26,9 @@ public class Payment implements Serializable {
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     Group group;
+
+    public Payment() {
+    }
 
     public int getId() {
         return id;

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -22,23 +23,24 @@ public class SearchAppsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout5);
 
-        ResteasyClient client = new ResteasyClientBuilder().build();
-        ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/apps/");
-        Response response = target.request().get();
-        if (response.hasEntity()) {
-            JSONArray groupsOfUser = (JSONArray) response.getEntity();
-            for (int i = 0; i < groupsOfUser.length(); ++i) {
-                try {
-                    JSONObject obj = groupsOfUser.getJSONObject(i);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                //zrobienie Stringa typu app name
-                //dodanie do linear layout
-                //obsluga przycisniecie konkretnej grupy
-            }
-        }
+//        ResteasyClient client = new ResteasyClientBuilder().build();
+//        ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/apps/");
+//        Response response = target.request().get();
+//        if (response.hasEntity()) {
+//            JSONArray groupsOfUser = (JSONArray) response.getEntity();
+//            for (int i = 0; i < groupsOfUser.length(); ++i) {
+//                try {
+//                    JSONObject obj = groupsOfUser.getJSONObject(i);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                //zrobienie Stringa typu app name
+//                //dodanie do linear layout
+//                //obsluga przycisniecie konkretnej grupy
+//            }
+//        }
 
         //w przypadku widoku poziomego wyswietlenie na polowie ekranu apps, na drugiej - packages i odpowiednia obsluga tego  - podmiana fragmentu na widok pakietow w ramach aplikacji
 

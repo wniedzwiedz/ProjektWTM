@@ -30,7 +30,7 @@ public class Encryption {
         return new String(encrypted);
     }
 
-    private static String encryptText(String password) throws NoSuchAlgorithmException, InvalidKeySpecException
+    public static String encryptText(String password) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         int iterations = 1000;
         char[] chars = password.toCharArray();

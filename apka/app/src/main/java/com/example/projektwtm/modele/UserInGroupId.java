@@ -1,4 +1,4 @@
-package com.example.projektwtm.models;
+package com.example.projektwtm.modele;
 
 import java.io.Serializable;
 import java.util.Objects;

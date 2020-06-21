@@ -102,6 +102,8 @@ public class UserController {
             builder.add(objectBuilder);
             return Response.status(201).entity(builder.build()).build();
         } catch (Exception e) {
+            if (e.getCause().getCause().getMessage().contains("Violation"))
+                return Response.status(409).build();
             return Response.status(500).build();
         }
     }

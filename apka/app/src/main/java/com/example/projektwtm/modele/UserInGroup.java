@@ -1,4 +1,4 @@
-package com.example.projektwtm.models;
+package com.example.projektwtm.modele;
 
 
 public class UserInGroup {

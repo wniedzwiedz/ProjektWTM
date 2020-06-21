@@ -18,7 +18,7 @@ public class SpecificUserFragment extends Fragment {
         TextView login = getView().findViewById(R.id.textView33);
         TextView firstname = getView().findViewById(R.id.textView36);
         TextView surname = getView().findViewById(R.id.textView38);
-        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout1);
+//        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout1);
 
         //przypisanie danych do text view w widoku uzytkownika
         //dodanie do linear layout grup użytkownika

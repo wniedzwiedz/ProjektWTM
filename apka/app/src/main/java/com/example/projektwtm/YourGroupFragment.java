@@ -28,7 +28,7 @@ public class YourGroupFragment extends Fragment {
         TextView packageame = getView().findViewById(R.id.textView24);
         TextView payment = getView().findViewById(R.id.textView26);
         TextView membersCount = getView().findViewById(R.id.textView28);
-        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout2);
+//        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout2);
         TextView error = getView().findViewById(R.id.textView50);
         ImageView image = getView().findViewById(R.id.imageView);
 

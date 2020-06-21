@@ -104,45 +104,7 @@
                     android:id="@+id/textView56"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/login"
-                    android:textColor="@android:color/background_dark" />
-
-                <EditText
-                    android:id="@+id/editText14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:hint="@string/groupPasswordVal"
-                    android:inputType="textPassword"
-                    android:textColor="@android:color/background_dark"
-                    tools:text="@string/groupPasswordVal" />
-
-                <TextView
-                    android:id="@+id/textView58"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/PasswordLabel"
-                    android:textColor="@android:color/background_dark" />
-
-                <EditText
-                    android:id="@+id/editText15"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:hint="@string/groupPasswordAgainVal"
-                    android:inputType="textPassword"
-                    android:textColor="@android:color/background_dark"
-                    tools:text="@string/groupPasswordAgainVal" />
-
-                <TextView
-                    android:id="@+id/textView60"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/PassowrdAgainLabel"
+                    android:text="@string/InfoText"
                     android:textColor="@android:color/background_dark" />
 
                 <Button

@@ -53,21 +53,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        EditText firstNameET = findViewById(R.id.editText9);
-        EditText surnameET = findViewById(R.id.editText7);
-        EditText emailET = findViewById(R.id.editText6);
-        EditText pass1ET = findViewById(R.id.editText4);
-        EditText pass2ET = findViewById(R.id.editText3);
-
-        final String firstname = firstNameET.getText().toString();
-        final String surname = surnameET.getText().toString();
-        final String email = emailET.getText().toString();
-        final String pass1 = pass1ET.getText().toString();
-        final String pass2 = pass2ET.getText().toString();
-
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                EditText firstNameET = findViewById(R.id.editText9);
+                EditText surnameET = findViewById(R.id.editText7);
+                EditText emailET = findViewById(R.id.editText6);
+                EditText pass1ET = findViewById(R.id.editText4);
+                EditText pass2ET = findViewById(R.id.editText3);
+
+                final String firstname = firstNameET.getText().toString();
+                final String surname = surnameET.getText().toString();
+                final String email = emailET.getText().toString();
+                final String pass1 = pass1ET.getText().toString();
+                final String pass2 = pass2ET.getText().toString();
+
                 boolean reg = false;
                 try {
                     reg = register(firstname, surname, email, pass1, pass2);
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 if (reg) {
                    User user = new User(firstname, surname, email, pass1);
 
+                   //stworzenie uzytkownika
                     ResteasyClient client = new ResteasyClientBuilder().build();
                     ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/");
                     Response response = target.request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
@@ -101,13 +102,14 @@ public class MainActivity extends AppCompatActivity {
         if (firstname.equals("") || surname.equals("") || email.equals("") || pass1.equals("") || pass2.equals("")) {
             return false;
         }
-        else if (!Pattern.matches("[A-Za-z]+", firstname) || !Pattern.matches("[A-Za-z]+", surname) /*|| !Pattern.matches("[A-Za-z]+[1-9_]*[@]{1}[A-Za-z1-9]+[.]{1}[a-z]+[.]{0,1}[a-z]+}", email) || !Pattern.matches("[A-Za-z1-9_!@]+", pass1)  || !Pattern.matches("[A-Za-z1-9_!@]+", pass2) */) {
-            return false;
-        }
+//        else if (!Pattern.matches("[A-Za-z]+", firstname) || !Pattern.matches("[A-Za-z]+", surname) /*|| !Pattern.matches("[A-Za-z]+[1-9_]*[@]{1}[A-Za-z1-9]+[.]{1}[a-z]+[.]{0,1}[a-z]+}", email) || !Pattern.matches("[A-Za-z1-9_!@]+", pass1)  || !Pattern.matches("[A-Za-z1-9_!@]+", pass2) */) {
+//            return false;
+//        }
         else if (!pass1.equals(pass2)) {
             return false;
         }
 
+        //sprawdzenie, czy uzytkownik juz istnieje
         ResteasyClient client = new ResteasyClientBuilder().build();
         ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/");
         Response response = target.request().get();

@@ -45,22 +45,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        EditText emailET = findViewById(R.id.editText2);
-        EditText passET = findViewById(R.id.editText5);
-
-        final String email = emailET.getText().toString();
-        final String pass = passET.getText().toString();
-
         Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             public void onClick(View v){
-                boolean log = true;
-//                try {
-//                    log = login(email, pass);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+                EditText emailET = findViewById(R.id.editText2);
+                EditText passET = findViewById(R.id.editText5);
+
+                final String email = emailET.getText().toString();
+                final String pass = passET.getText().toString();
+                
+                boolean log = false;
+                try {
+                    log = login(email, pass);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 if (log) {
                     //push notification
 
@@ -81,9 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                             .setContentTitle("Login")
                             .setContentText("You have logged in. Enjoy your time!")
                             .setSmallIcon(R.drawable.ic_launcher_foreground);
-                    
-                    notificationManager.notify(100, notification.build());
 
+                    notificationManager.notify(100, notification.build());
+                    
                     Intent intent = new Intent(LoginActivity.this, MainPage.class);
                     TextView error = findViewById(R.id.textView11);
                     error.setText("");
@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
+        //sprawdzenie, czy dane poprawne
         ResteasyClient client = new ResteasyClientBuilder().build();
         ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users");
         Response response = target.request().get();

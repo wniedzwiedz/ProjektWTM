@@ -46,6 +46,7 @@ public class SettingsFragment extends Fragment {
                     TextView error = getView().findViewById(R.id.textView48);
                     error.setText("");
 
+                    //aktualizacja 
                     ResteasyClient client = new ResteasyClientBuilder().build();
                     ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/"); // + user.getId()
                     //user.setFirstname(firstname);
@@ -67,6 +68,7 @@ public class SettingsFragment extends Fragment {
                     TextView error = getView().findViewById(R.id.textView48);
                     error.setText("");
 
+                    //aktualizacja 
                     ResteasyClient client = new ResteasyClientBuilder().build();
                     ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/"); // + user.getId()
                     //user.setSurname(surname);
@@ -88,6 +90,7 @@ public class SettingsFragment extends Fragment {
                     TextView error = getView().findViewById(R.id.textView48);
                     error.setText("");
 
+                    //aktualizacja 
                     ResteasyClient client = new ResteasyClientBuilder().build();
                     ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/"); // + user.getId()
                     //user.setEmail(email);
@@ -109,6 +112,7 @@ public class SettingsFragment extends Fragment {
                     TextView error = getView().findViewById(R.id.textView48);
                     error.setText("");
 
+                    //aktualizacja 
                     ResteasyClient client = new ResteasyClientBuilder().build();
                     ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/"); // + user.getId()
                     //user.setPasswordHash(pass1);
@@ -125,6 +129,7 @@ public class SettingsFragment extends Fragment {
         Button button4 = getView().findViewById(R.id.button11);
         button4.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+                //wylogowanie
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }

@@ -23,6 +23,8 @@ public class AddGroupFragment extends Fragment {
         EditText loginET = getView().findViewById(R.id.editText13);
         EditText pass1ET = getView().findViewById(R.id.editText14);
         EditText pass2ET = getView().findViewById(R.id.editText15);
+        
+        TextView error = getView().findViewById(R.id.textView62);
 
         final String paymentDeadline = paymentDeadlineET.getText().toString();
         final String accountNumber = accountNumberET.getText().toString();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyGroupFragment">
+    tools:context=".YourGroupFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,9 +16,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/errorGroupModify"
+                android:textColor="@android:color/holo_red_dark" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -37,6 +45,8 @@
                         android:id="@+id/textView7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:text="@string/groupNameHint"
                         android:textColor="@android:color/background_dark"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,16 +60,13 @@
                         android:id="@+id/textView6"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:layout_marginBottom="16dp"
                         android:gravity="center"
                         android:text="@string/groupNameText"
                         android:textColor="@android:color/background_dark"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,11 +102,15 @@
                 android:text="@string/groupPaymentPerPersonText"
                 android:textColor="@android:color/background_dark" />
 
-            <TextView
-                android:id="@+id/textView2"
+            <EditText
+                android:id="@+id/editText18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/groupPaymentDeadlineVal"
+                android:inputType="textPersonName"
                 android:text="@string/groupPaymentDeadlineVal"
                 android:textColor="@android:color/background_dark" />
 
@@ -110,13 +121,17 @@
                 android:text="@string/groupPaymentDeadlineText"
                 android:textColor="@android:color/background_dark" />
 
-            <TextView
-                android:id="@+id/textView21"
+            <EditText
+                android:id="@+id/editText19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/groupBankAccountNumberVal"
+                android:inputType="textPersonName"
                 android:text="@string/groupBankAccountNumberVal"
-                android:textColor="@android:color/background_dark" />
+                android:textColor="@android:color/background_dark"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -140,13 +155,17 @@
                 android:text="@string/groupPersonCountText"
                 android:textColor="@android:color/background_dark" />
 
-            <TextView
-                android:id="@+id/textView23"
+            <EditText
+                android:id="@+id/editText20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/groupLoginVal"
+                android:inputType="textPersonName"
                 android:text="@string/groupLoginVal"
-                android:textColor="@android:color/background_dark" />
+                android:textColor="@android:color/background_dark"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textView30"
@@ -155,26 +174,34 @@
                 android:text="@string/InfoText"
                 android:textColor="@android:color/background_dark" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical"></LinearLayout>
-
             <TextView
                 android:id="@+id/textView34"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/groupMembersText"
+                android:textColor="@android:color/background_dark" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/updateGroup"
                 android:textColor="@android:color/background_dark" />
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/groupLeaveButton"
+                android:layout_marginTop="8dp"
+                android:text="@string/deletegroupButton"
                 android:textColor="@android:color/background_dark" />
 
         </LinearLayout>

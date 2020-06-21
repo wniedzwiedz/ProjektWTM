@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -37,17 +39,22 @@ public class SearchGroupsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_search_groups, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         LinearLayout linearLayout = getView().findViewById(R.id.linearLayout4);
-        Button button = getView().findViewById(R.id.fab);
+        FloatingActionButton button = getView().findViewById(R.id.fab);
 
         //gdy wyswietlamy dla grup uzytkownika - przycisk sie nie wyswietla/jest nieaktywny
         //gdy dla grup w ramach pakietu - wyswietla sie i sluzy do dodania grupy w ramach pakietu
         JSONArray groups = null;
-        try {
-            groups = SearchAppsFragment.app.getJSONArray("groups");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            groups = SearchAppsFragment.app.getJSONArray("groups");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         if (groups != null) {
             for (int i = 0; i < groups.length(); i++) {
                 TextView text = null;
@@ -62,20 +69,17 @@ public class SearchGroupsFragment extends Fragment {
             }
         }
 
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             public void onClick(View v) {
                 Fragment newFragment = new AddGroupFragment();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-                transaction.replace(R.layout.fragment_search_groups,  newFragment);
+                transaction.replace(R.layout.activity_main_page, newFragment);
                 transaction.addToBackStack(null);
 
                 transaction.commit();
             }
         });
-
-
-        return inflater.inflate(R.layout.fragment_search_groups, container, false);
     }
 }

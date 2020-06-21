@@ -26,16 +26,22 @@ public class SearchPackagesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout3);
+        return inflater.inflate(R.layout.fragment_search_packages, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout3);
         //dodanie do linearLayout pakietow
 
         //pobranie pakietow
         JSONArray packages = null;
-        try {
-            packages = SearchAppsFragment.app.getJSONArray("packages");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            packages = SearchAppsFragment.app.getJSONArray("packages");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         if (packages != null) {
             for (int i = 0; i < packages.length(); i++) {
                 TextView text = null;
@@ -52,6 +58,5 @@ public class SearchPackagesFragment extends Fragment {
 
         //w przypadku widoku poziomego wyswietlenie na polowie ekranu apps, na drugiej - packages i odpowiednia obsluga tego  - podmiana fragmentu na widok grup w ramach pakietu
 
-        return inflater.inflate(R.layout.fragment_search_packages, container, false);
     }
 }

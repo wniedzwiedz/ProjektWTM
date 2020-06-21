@@ -22,6 +22,11 @@ public class MyGroupFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_my_group, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         //wyswietlenie odpowiednich danych o grupie
         TextView groupname = getView().findViewById(R.id.textView6);
         TextView packagename = getView().findViewById(R.id.textView24);
@@ -74,7 +79,6 @@ public class MyGroupFragment extends Fragment {
                 //podmiana fragmentu na widok grup uzytkownika
             }
         });
-
-        return inflater.inflate(R.layout.fragment_my_group, container, false);
     }
+
 }

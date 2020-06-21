@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!users.isEmpty()) {
             Intent intent = new Intent(this, MainPage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
 
@@ -125,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
                     HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
 
                     try {
-//                        TextView error = findViewById(R.id.textView17);
 
                         if (myConnection.getResponseCode() == 200) {
 
@@ -186,7 +186,6 @@ public class LoginActivity extends AppCompatActivity {
                                         notificationManager.notify(100, notification.build());
 
                                         Intent intent = new Intent(LoginActivity.this, MainPage.class);
-//                                        error.setText("");
                                         startActivity(intent);
                                     }
                                 }

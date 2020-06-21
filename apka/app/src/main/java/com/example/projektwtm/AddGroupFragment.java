@@ -42,6 +42,12 @@ public class AddGroupFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_add_group, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
         paymentDeadlineET = getView().findViewById(R.id.editText);
         accountNumberET = getView().findViewById(R.id.editText8);
         loginET = getView().findViewById(R.id.editText13);
@@ -64,9 +70,10 @@ public class AddGroupFragment extends Fragment {
                 addGroup(paymentDeadline, accountNumber, login, pass1, pass2);
             }
         });
-
-        return inflater.inflate(R.layout.fragment_add_group, container, false);
     }
+
+
+
 
     public void addGroup(final String paymentDeadline, final String accountNumber, final String login, String pass1, String pass2) {
         error = getView().findViewById(R.id.textView62);

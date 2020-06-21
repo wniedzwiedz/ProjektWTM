@@ -31,6 +31,11 @@ public class YourGroupFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_your_group, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         //uzupelnienie danych grupy
         TextView groupname = getView().findViewById(R.id.textView36);
@@ -54,9 +59,9 @@ public class YourGroupFragment extends Fragment {
                 final String accountNumber = accountNumberET.getText().toString();
                 final String login = loginET.getText().toString();
 
-                    changeGroup(paymentDeadline,accountNumber,login);
-                    TextView error = getView().findViewById(R.id.textView50);
-                    error.setText("");
+                changeGroup(paymentDeadline,accountNumber,login);
+                TextView error = getView().findViewById(R.id.textView50);
+                error.setText("");
 
             }
         });
@@ -69,8 +74,9 @@ public class YourGroupFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_your_group, container, false);
     }
+
+
 
     public void changeGroup(final String paymentDeadline, final String accountNumber, final String login) {
         TextView error = getView().findViewById(R.id.textView50);

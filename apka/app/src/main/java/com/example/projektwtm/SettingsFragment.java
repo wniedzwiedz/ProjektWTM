@@ -43,6 +43,12 @@ public class SettingsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_settings, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         firstnameET = getView().findViewById(R.id.editText12);
         surnameET = getView().findViewById(R.id.editText16);
@@ -101,9 +107,8 @@ public class SettingsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
+
 
     public void changeFirstname(final String firstname) {
         TextView error = getView().findViewById(R.id.textView48);

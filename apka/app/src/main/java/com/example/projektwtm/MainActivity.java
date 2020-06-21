@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!users.isEmpty()) {
             Intent intent = new Intent(this, MainPage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
 
@@ -109,30 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 String pass2 = pass2ET.getText().toString();
 
                 register(firstname, surname, email, pass1, pass2);
-//                boolean reg = false;
-//                try {
-//                    reg = register(firstname, surname, email, pass1, pass2);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                if (reg) {
-//                    User user = new User(firstname, surname, email, pass1);
-
-//                    ResteasyClient client = new ResteasyClientBuilder().build();
-//                    ResteasyWebTarget target = client.target("http://localhost:8080/FindCo/api/users/");
-//                    Response response = target.request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
-//                    response.close();
-
-//                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                    TextView error = findViewById(R.id.textView17);
-//                    error.setText("");
-//                    startActivity(intent);
-//                } else {
-//                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                    TextView error = findViewById(R.id.textView17);
-//                    error.setText("Incorrect data. Try again.");
-//                    startActivity(intent);
-//                }
             }
         });
     }

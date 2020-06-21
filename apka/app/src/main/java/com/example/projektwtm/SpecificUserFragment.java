@@ -15,6 +15,11 @@ public class SpecificUserFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_specific_user, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         TextView login = getView().findViewById(R.id.textView33);
         TextView firstname = getView().findViewById(R.id.textView36);
         TextView surname = getView().findViewById(R.id.textView38);
@@ -22,7 +27,7 @@ public class SpecificUserFragment extends Fragment {
 
         //przypisanie danych do text view w widoku uzytkownika
         //dodanie do linear layout grup użytkownika
-        
-        return inflater.inflate(R.layout.fragment_specific_user, container, false);
     }
+
+
 }

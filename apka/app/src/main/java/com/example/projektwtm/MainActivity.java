@@ -27,10 +27,22 @@ import javax.ws.rs.core.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private IntentFilter filter = new IntentFilter("android.password.wrong");
+
+    private BroadcastReceiver broadcast = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context arg0, Intent arg1) {
+            Toast.makeText(arg0, "Wrong password!", Toast.LENGTH_LONG).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerReceiver(broadcast, filter);
         setContentView(R.layout.activity_main);
+
+
 
         TextView textView = findViewById(R.id.textView8);
         textView.setText(Html.fromHtml("<font color='black'><u>"+ getResources().getString(R.string.linkLogin) +"</u></font>"));
@@ -112,5 +124,19 @@ public class MainActivity extends AppCompatActivity {
         response.close();
 
         return true;
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(broadcast);
+        // trzeba zawsze po sobie posprzątać w tym przypadku wyrejestrować receiver.
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(broadcast, filter);
+
     }
 }

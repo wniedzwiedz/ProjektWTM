@@ -113,6 +113,12 @@ public class Encryption {
         {
             diff |= hash[i] ^ testHash[i];
         }
+        Intent intent = new Intent();
+        intent.setAction("android.password.wrong");
+        if (diff!=0){
+            sendBroadcast(intent);
+        }
+
         return diff == 0;
     }
 }

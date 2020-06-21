@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,8 @@ public class MyGroupFragment extends Fragment {
         TextView membersCount = getView().findViewById(R.id.textView28);
         TextView login = getView().findViewById(R.id.textView23);
         TextView password = getView().findViewById(R.id.textView31);
+
+        ImageView image = getView().findViewById(R.id.imageView);
 
         LinearLayout linearLayout = getView().findViewById(R.id.linearLayout6);
         //dodanie czlonkow do linear layout

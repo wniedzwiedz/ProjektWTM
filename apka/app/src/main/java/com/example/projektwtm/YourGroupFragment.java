@@ -1,5 +1,6 @@
 package com.example.projektwtm;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,8 +15,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.regex.Pattern;
 
 public class YourGroupFragment extends Fragment {
@@ -28,7 +37,8 @@ public class YourGroupFragment extends Fragment {
         TextView packageame = getView().findViewById(R.id.textView24);
         TextView payment = getView().findViewById(R.id.textView26);
         TextView membersCount = getView().findViewById(R.id.textView28);
-        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout2);
+//        LinearLayout linearLayout = getView().findViewById(R.id.linearLayout2);
+        //wylistowanie czlonkow
         TextView error = getView().findViewById(R.id.textView50);
         ImageView image = getView().findViewById(R.id.imageView);
 
@@ -39,51 +49,152 @@ public class YourGroupFragment extends Fragment {
                 EditText paymentDeadlineET = getView().findViewById(R.id.editText18);
                 EditText accountNumberET = getView().findViewById(R.id.editText19);
                 EditText loginET = getView().findViewById(R.id.editText20);
-//                EditText pass1ET = getView().findViewById(R.id.editText21);
-//                EditText pass2ET = getView().findViewById(R.id.editText22);
 
                 final String paymentDeadline = paymentDeadlineET.getText().toString();
                 final String accountNumber = accountNumberET.getText().toString();
                 final String login = loginET.getText().toString();
-//                final String pass1 = pass1ET.getText().toString();
-//                final String pass2 = pass2ET.getText().toString();
 
-//                boolean change = changeGroup(paymentDeadline, accountNumber, login, pass1, pass2);
-//                if (change) {
-//                    //aktualizacja informacji o grupie - REST
-//                    TextView error = getView().findViewById(R.id.textView50);
-//                    error.setText("");
-//                }
-//                else {
-//                    TextView error = getView().findViewById(R.id.textView50);
-//                    error.setText("Incorrect data. Try again.");
-//                }
+                    changeGroup(paymentDeadline,accountNumber,login);
+                    TextView error = getView().findViewById(R.id.textView50);
+                    error.setText("");
+
             }
         });
 
         Button button1 = getView().findViewById(R.id.button5);
         button1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                //usuniecie grupy - REST
+                //deleteGroup(grupa z grup uzytkownika id);
                 //podmiana fragmentu na widok grup uzytkownika - R.layout.fragment_search_groups
             }
-            });
+        });
 
         return inflater.inflate(R.layout.fragment_your_group, container, false);
     }
 
-    public boolean changeGroup(String paymentDeadline, String accountNumber, String login, String pass1, String pass2) {
-        if (paymentDeadline.equals("") || accountNumber.equals("") || login.equals("") || pass1.equals("") || pass2.equals("")) {
-            return false;
-        }
-        else if (!pass1.equals(pass2)) {
-            return false;
-        }
-        else if (!Pattern.matches("20[2-9]{1}[0-9]{1}-[1-9]{1,2}-[1-3]{0,1}[0-9]", paymentDeadline) || !Pattern.matches("[0-9]+", accountNumber) || !Pattern.matches("[a-zA-Z0-9]", login) || !Pattern.matches("[A-Za-z1-9_!@]+", pass1)  || !Pattern.matches("[A-Za-z1-9_!@]+", pass2)) {
-            return false;
+    public void changeGroup(final String paymentDeadline, final String accountNumber, final String login) {
+        TextView error = getView().findViewById(R.id.textView50);
+
+        if (paymentDeadline.equals("") || accountNumber.equals("") || login.equals("")) {
+            error.setText("Empty data");
+            return;
         }
 
-        return true;
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL addUserURL = new URL("http://" + Constants.serverIP + ":8080/FindCo/api/groups/"); // fragment do grup uzytkownika + .getInt("id"));
+                    HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
+                    myConnection.setRequestMethod("PUT");
+                    myConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+                    myConnection.setRequestProperty("Accept", "application/json");
+                    myConnection.setDoOutput(true);
+
+                    String jsonInputString = "{\"bankAccountNumber\" : \"" + accountNumber + "\", " +
+                            "\"login\" : \"" + login + "\", }";
+
+                    try {
+                        OutputStream os = myConnection.getOutputStream();
+                        byte[] input = jsonInputString.getBytes("utf-8");
+                        os.write(input, 0, input.length);
+                        os.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    BufferedReader bufferedReader = null;
+                    try {
+                        TextView error = getView().findViewById(R.id.textView48);
+
+                        if (myConnection.getResponseCode() == 200) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(myConnection.getInputStream(), "utf-8"));
+                            StringBuilder response = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = bufferedReader.readLine()) != null) {
+                                response.append(responseLine.trim());
+                            }
+                            System.out.println(response.toString());
+                            // save user to sqlLite
+
+                            error.setText("Data changed.");
+                        } else if (myConnection.getResponseCode() == 400) {
+                            error.setText("Wrong number format.");
+                        } else {
+                            error.setText("Server error.");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
     }
+
+    public void deleteGroup(final int id) {
+        TextView error = getView().findViewById(R.id.textView50);
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL addUserURL = new URL("http://" + Constants.serverIP + ":8080/FindCo/api/groups/"); // fragment do grup uzytkownika + .getInt("id"));
+                    HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
+                    myConnection.setRequestMethod("DELETE");
+                    myConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+                    myConnection.setRequestProperty("Accept", "application/json");
+                    myConnection.setDoOutput(true);
+
+                    String jsonInputString = "{\"id\" : \"" + id + "\" }";
+
+                    try {
+                        OutputStream os = myConnection.getOutputStream();
+                        byte[] input = jsonInputString.getBytes("utf-8");
+                        os.write(input, 0, input.length);
+                        os.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    BufferedReader bufferedReader = null;
+                    try {
+                        TextView error = getView().findViewById(R.id.textView48);
+
+                        if (myConnection.getResponseCode() == 200) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(myConnection.getInputStream(), "utf-8"));
+                            StringBuilder response = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = bufferedReader.readLine()) != null) {
+                                response.append(responseLine.trim());
+                            }
+                            System.out.println(response.toString());
+                            // save user to sqlLite
+
+                            error.setText("Data changed.");
+                        } else if (myConnection.getResponseCode() == 400) {
+                            error.setText("Wrong number format.");
+                        } else {
+                            error.setText("Server error.");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
 
 }

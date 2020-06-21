@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     EditText pass2ET;
 
     private IntentFilter filter = new IntentFilter("android.password.wrong");
+    private IntentFilter filter2 = new IntentFilter("android.intent.action.BATTERY_LOW");
 
     private BroadcastReceiver broadcast = new BroadcastReceiver() {
         @Override
@@ -55,10 +56,18 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private BroadcastReceiver broadcast2 = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context arg0, Intent arg1) {
+            Toast.makeText(arg0, "Remember to charge your phone not to miss payment deadlines!", Toast.LENGTH_LONG).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerReceiver(broadcast, filter);
+        registerReceiver(broadcast2, filter2);
         setContentView(R.layout.activity_main);
 
         // check if logged
@@ -216,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         unregisterReceiver(broadcast);
+        unregisterReceiver(broadcast2);
         // trzeba zawsze po sobie posprzątać w tym przypadku wyrejestrować receiver.
         super.onPause();
     }
@@ -224,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         registerReceiver(broadcast, filter);
+        registerReceiver(broadcast2, filter2);
 
     }
 }

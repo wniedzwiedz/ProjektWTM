@@ -84,19 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             error.setText("All data required. Try again.");
         }
 
-        final String passwordHash;
-        try {
-            passwordHash = Encryption.encryptText(pass);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            error.setText("Incorrect data. Try again.");
-            return;
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-            error.setText("Incorrect data. Try again.");
-            return;
-        }
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -119,8 +106,8 @@ public class LoginActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String emailJSON = jsonObject.getString("email");
-                                String pass = jsonObject.getString("passwordHash");
-                                if (emailJSON.equals(email) && pass.equals(passwordHash))
+                                String passJSON = jsonObject.getString("passwordHash");
+                                if (emailJSON.equals(email) && Encryption.validatePassword(pass,passJSON))
                                 {
 
                                     loggedUser = jsonObject;

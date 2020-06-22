@@ -21,12 +21,10 @@ public class Group {
     private String bankAccountNumber;
     @Column(name = "max_number_of_members")
     private int maxNumberOfMembers;
-    @Column(name = "login_hash")
-    private String loginHash;
-    @Column(name = "password_hash")
-    private String passwordHash;
-    @Column(name = "group_hash")
-    private String groupHash;
+    @Column(name = "information")
+    private String information;
+    @Column(name = "payment_info")
+    private String paymentInfo;
 
     @ManyToOne
     @JoinColumn(name = "package_id")
@@ -35,9 +33,6 @@ public class Group {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
-
-    @OneToMany(mappedBy = "group")
-    private List<Payment> payments;
 
     @OneToMany(mappedBy = "group")
     private List<UserInGroup> userInGroups;
@@ -74,30 +69,6 @@ public class Group {
         this.maxNumberOfMembers = maxNumberOfMembers;
     }
 
-    public String getLoginHash() {
-        return loginHash;
-    }
-
-    public void setLoginHash(String loginHash) {
-        this.loginHash = loginHash;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getGroupHash() {
-        return groupHash;
-    }
-
-    public void setGroupHash(String groupHash) {
-        this.groupHash = groupHash;
-    }
-
     public Package getaPackage() {
         return aPackage;
     }
@@ -114,19 +85,27 @@ public class Group {
         this.owner = owner;
     }
 
-    public List<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(List<Payment> payments) {
-        this.payments = payments;
-    }
-
     public List<UserInGroup> getUserInGroups() {
         return userInGroups;
     }
 
     public void setUserInGroups(List<UserInGroup> userInGroups) {
         this.userInGroups = userInGroups;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+    public String getPaymentInfo() {
+        return paymentInfo;
+    }
+
+    public void setPaymentInfo(String paymentInfo) {
+        this.paymentInfo = paymentInfo;
     }
 }

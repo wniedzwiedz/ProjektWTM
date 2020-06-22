@@ -23,8 +23,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy = "user")
-    List<Payment> payments;
+//    @OneToMany(mappedBy = "user")
+//    List<Payment> payments;
 
     @OneToMany(mappedBy = "owner")
     List<Group> myGroups;
@@ -73,13 +73,13 @@ public class User {
         this.email = email;
     }
 
-    public List<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(List<Payment> payments) {
-        this.payments = payments;
-    }
+//    public List<Payment> getPayments() {
+//        return payments;
+//    }
+//
+//    public void setPayments(List<Payment> payments) {
+//        this.payments = payments;
+//    }
 
     public List<Group> getMyGroups() {
         return myGroups;

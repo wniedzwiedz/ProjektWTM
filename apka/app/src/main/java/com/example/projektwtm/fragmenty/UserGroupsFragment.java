@@ -20,7 +20,6 @@ import com.example.projektwtm.DBHelper;
 import com.example.projektwtm.R;
 import com.example.projektwtm.RootFragment;
 import com.example.projektwtm.modele.User;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,22 +46,6 @@ public class UserGroupsFragment extends RootFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final LinearLayout linearLayout = getView().findViewById(R.id.linearLayout44);
-        FloatingActionButton button = getView().findViewById(R.id.fab);
-
-        //gdy wyswietlamy dla grup uzytkownika - przycisk sie nie wyswietla/jest nieaktywny
-        //gdy dla grup w ramach pakietu - wyswietla sie i sluzy do dodania grupy w ramach pakietu
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @SuppressLint("ResourceType")
-//            @Override
-//            public void onClick(View view) {
-//                Fragment fragment = new AddGroupFragment();
-//                FragmentManager fragmentManager = getChildFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.layout.fragment_search_groups, fragment);
-//                fragmentTransaction.commit();
-//            }
-//        });
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -70,7 +53,7 @@ public class UserGroupsFragment extends RootFragment {
                 try {
                     DBHelper dbHelper = new DBHelper(getContext());
                     List<User> user = dbHelper.getUser();
-                    int id = user.get(0).getId();
+                    final int id = user.get(0).getId();
 
                     URL addUserURL = new URL("http://" + Constants.serverIP + ":8080/FindCo/api/groups?user=" + id + "&userConfirmed=true");
                     HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
@@ -104,14 +87,19 @@ public class UserGroupsFragment extends RootFragment {
                                                 public void onClick(View v) {
                                                     try {
                                                         groupID = finalJsonObject.getInt("id");
+                                                        Fragment newFragment;
+                                                        if (finalJsonObject.getInt("ownerId") == id) {
+                                                            newFragment = new YourGroupFragment();
+                                                        } else {
+                                                            newFragment = new MyGroupFragment();
+                                                        }
+                                                        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                                                        transaction.replace(R.id.fragment_mainLayout, newFragment);
+                                                        transaction.addToBackStack(null);
+                                                        transaction.commit();
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
                                                     }
-                                                    Fragment newFragment = new SearchGroupsFragment();
-                                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                                    transaction.replace(((ViewGroup) getView().getParent()).getId(), newFragment);
-                                                    transaction.addToBackStack(null);
-                                                    transaction.commit();
                                                 }
                                             });
                                             linearLayout.addView(text);

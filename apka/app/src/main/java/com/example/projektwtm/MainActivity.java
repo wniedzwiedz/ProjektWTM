@@ -1,12 +1,9 @@
 package com.example.projektwtm;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -16,13 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.projektwtm.modele.User;
-
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.json.JSONArray;
-import org.json.JSONException;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
     private IntentFilter filter = new IntentFilter("android.password.wrong");
     private IntentFilter filter2 = new IntentFilter("android.intent.action.BATTERY_LOW");
 
-    private BroadcastReceiver broadcast = new BroadcastReceiver() {
+    public BroadcastReceiver broadcast = new BroadcastReceiver() {
         @Override
         public void onReceive(Context arg0, Intent arg1) {
             Toast.makeText(arg0, "Wrong password!", Toast.LENGTH_LONG).show();
         }
     };
 
-    private BroadcastReceiver broadcast2 = new BroadcastReceiver(){
+    public BroadcastReceiver broadcast2 = new BroadcastReceiver(){
         @Override
         public void onReceive(Context arg0, Intent arg1) {
             Toast.makeText(arg0, "Remember to charge your phone not to miss payment deadlines!", Toast.LENGTH_LONG).show();

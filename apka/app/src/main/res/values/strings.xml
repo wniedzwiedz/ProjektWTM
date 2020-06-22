@@ -48,10 +48,11 @@
     <string name="groupNameHint">Group name</string>
     <string name="groupPackageName"></string>
     <string name="groupPackageNameHint">Package name</string>
+    <string name="groupGroupNameHint">Group name</string>
     <string name="groupPaymentPerPersonVal"></string>
     <string name="groupPaymentPerPersonText">Payment per person</string>
     <string name="groupPersonCountVal"></string>
-    <string name="groupPersonCountText">Number of members</string>
+    <string name="groupPersonCountText">Max number of members</string>
     <string name="groupPaymentDeadlineVal"></string>
     <string name="groupPaymentDeadlineText">Payment deadline</string>
     <string name="groupBankAccountNumberVal"></string>
@@ -64,7 +65,7 @@
     <string name="groupLeaveButton">Leave</string>
     <string name="groupMembersText">Members</string>
     <string name="personLoginVal">" "</string>
-    <string name="personLoginText">Login</string>
+    <string name="personLoginText">Email</string>
     <string name="personFirstnameVal">" "</string>
     <string name="personFirstnameText">Firstname</string>
     <string name="personSurnameVal">" "</string>
@@ -90,4 +91,8 @@
     <string name="errorGroupModify">" "</string>
     <string name="AddButton">Add</string>
     <string name="InfoText">Information</string>
+    <string name="nameAddGroup">" "</string>
+    <string name="nameAddText">Name</string>
+    <string name="peopleNumber">" "</string>
+    <string name="maxMembers">Maximum number of members</string>
 </resources>

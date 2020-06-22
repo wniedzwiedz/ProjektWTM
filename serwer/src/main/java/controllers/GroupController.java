@@ -60,14 +60,11 @@ public class GroupController {
             if (g.getMaxNumberOfMembers() != 0) {
                 objectBuilder.add("maxNumberOfMembers", g.getMaxNumberOfMembers());
             }
-            if (g.getLoginHash() != null) {
-                objectBuilder.add("loginHash", g.getLoginHash());
+            if (g.getInformation() != null) {
+                objectBuilder.add("information", g.getInformation());
             }
-            if (g.getPasswordHash() != null) {
-                objectBuilder.add("passwordHash", g.getPasswordHash());
-            }
-            if (g.getGroupHash() != null) {
-                objectBuilder.add("groupHash", g.getGroupHash());
+            if (g.getPaymentInfo() != null) {
+                objectBuilder.add("paymentInfo", g.getPaymentInfo());
             }
             builder.add(objectBuilder);
         }
@@ -97,14 +94,11 @@ public class GroupController {
                 if (g.getMaxNumberOfMembers() != 0) {
                     objectBuilder.add("maxNumberOfMembers", g.getMaxNumberOfMembers());
                 }
-                if (g.getLoginHash() != null) {
-                    objectBuilder.add("loginHash", g.getLoginHash());
+                if (g.getInformation() != null) {
+                    objectBuilder.add("information", g.getInformation());
                 }
-                if (g.getPasswordHash() != null) {
-                    objectBuilder.add("passwordHash", g.getPasswordHash());
-                }
-                if (g.getGroupHash() != null) {
-                    objectBuilder.add("groupHash", g.getGroupHash());
+                if (g.getPaymentInfo() != null) {
+                    objectBuilder.add("paymentInfo", g.getPaymentInfo());
                 }
                 builder.add(objectBuilder);
                 return Response.status(200).entity(builder.build()).build();
@@ -140,14 +134,11 @@ public class GroupController {
             if (g.getMaxNumberOfMembers() != 0) {
                 objectBuilder.add("maxNumberOfMembers", g.getMaxNumberOfMembers());
             }
-            if (g.getLoginHash() != null) {
-                objectBuilder.add("loginHash", g.getLoginHash());
+            if (g.getInformation() != null) {
+                objectBuilder.add("information", g.getInformation());
             }
-            if (g.getPasswordHash() != null) {
-                objectBuilder.add("passwordHash", g.getPasswordHash());
-            }
-            if (g.getGroupHash() != null) {
-                objectBuilder.add("groupHash", g.getGroupHash());
+            if (g.getPaymentInfo() != null) {
+                objectBuilder.add("paymentInfo", g.getPaymentInfo());
             }
             builder.add(objectBuilder);
             return Response.status(201).entity(builder.build()).build();
@@ -184,14 +175,11 @@ public class GroupController {
                 if (g.getMaxNumberOfMembers() != 0) {
                     objectBuilder.add("maxNumberOfMembers", g.getMaxNumberOfMembers());
                 }
-                if (g.getLoginHash() != null) {
-                    objectBuilder.add("loginHash", g.getLoginHash());
+                if (g.getInformation() != null) {
+                    objectBuilder.add("information", g.getInformation());
                 }
-                if (g.getPasswordHash() != null) {
-                    objectBuilder.add("passwordHash", g.getPasswordHash());
-                }
-                if (g.getGroupHash() != null) {
-                    objectBuilder.add("groupHash", g.getGroupHash());
+                if (g.getPaymentInfo() != null) {
+                    objectBuilder.add("paymentInfo", g.getPaymentInfo());
                 }
                 builder.add(objectBuilder);
                 return Response.status(200).entity(builder.build()).build();
@@ -230,14 +218,11 @@ public class GroupController {
             if (g.getMaxNumberOfMembers() != 0) {
                 objectBuilder.add("maxNumberOfMembers", g.getMaxNumberOfMembers());
             }
-            if (g.getLoginHash() != null) {
-                objectBuilder.add("loginHash", g.getLoginHash());
+            if (g.getInformation() != null) {
+                objectBuilder.add("information", g.getInformation());
             }
-            if (g.getPasswordHash() != null) {
-                objectBuilder.add("passwordHash", g.getPasswordHash());
-            }
-            if (g.getGroupHash() != null) {
-                objectBuilder.add("groupHash", g.getGroupHash());
+            if (g.getPaymentInfo() != null) {
+                objectBuilder.add("paymentInfo", g.getPaymentInfo());
             }
             builder.add(objectBuilder);
             return Response.status(200).entity(builder.build()).build();
@@ -261,7 +246,12 @@ public class GroupController {
             int idUserInt = Integer.parseInt(idUser);
             boolean res = groupService.addUser(idGroupInt, idUserInt);
             if (res) {
-                return Response.status(200).build();
+                res = groupService.confirmUser(idGroupInt, idUserInt);
+                if (res) {
+                    return Response.status(200).build();
+                } else {
+                    return Response.status(204).build();
+                }
             } else {
                 return Response.status(204).build();
             }

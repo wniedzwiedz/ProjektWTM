@@ -56,6 +56,17 @@ public class SettingsFragment extends RootFragment {
         pass1ET = getView().findViewById(R.id.editText11);
         pass2ET = getView().findViewById(R.id.editText10);
 
+        try {
+            DBHelper dbHelper = new DBHelper(getContext());
+            List<User> users = dbHelper.getUser();
+            User user = users.get(0);
+            firstnameET.setText(user.getFirstName());
+            surnameET.setText(user.getLastName());
+            emailET.setText(user.getEmail());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         Button button = getView().findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -103,6 +114,7 @@ public class SettingsFragment extends RootFragment {
                 }
 
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });

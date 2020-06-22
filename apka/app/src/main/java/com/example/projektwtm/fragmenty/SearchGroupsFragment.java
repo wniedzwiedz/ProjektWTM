@@ -49,7 +49,7 @@ public class SearchGroupsFragment extends RootFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final LinearLayout linearLayout = getView().findViewById(R.id.linearLayout4);
-        FloatingActionButton button = getView().findViewById(R.id.fab);
+        final FloatingActionButton button = getView().findViewById(R.id.fab);
 
         //gdy wyswietlamy dla grup uzytkownika - przycisk sie nie wyswietla/jest nieaktywny
         //gdy dla grup w ramach pakietu - wyswietla sie i sluzy do dodania grupy w ramach pakietu
@@ -62,6 +62,7 @@ public class SearchGroupsFragment extends RootFragment {
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_mainLayout, newFragment);
                 transaction.addToBackStack(null);
+                button.setVisibility(View.GONE);
                 transaction.commit();
             }
         });
@@ -105,10 +106,11 @@ public class SearchGroupsFragment extends RootFragment {
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
                                                     }
-                                                    Fragment newFragment = new SearchGroupsFragment();
+                                                    Fragment newFragment = new SpecificGroupFragment();
                                                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                                                     transaction.replace(R.id.fragment_mainLayout, newFragment);
                                                     transaction.addToBackStack(null);
+                                                    button.setVisibility(View.GONE);
                                                     transaction.commit();
                                                 }
                                             });

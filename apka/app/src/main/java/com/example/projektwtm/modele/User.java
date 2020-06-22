@@ -4,8 +4,6 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @DatabaseTable(tableName = "user_entity")
 public class User implements Serializable {
@@ -25,12 +23,6 @@ public class User implements Serializable {
     @DatabaseField(columnName = "email")
     private String email;
 
-    List<Payment> payments;
-
-    List<Group> myGroups;
-
-    List<UserInGroup> userInGroups;
-
     public User() {
     }
 
@@ -39,9 +31,6 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.email = email;
         this.passwordHash = passwordHash;
-        payments = new ArrayList<>();
-        myGroups = new ArrayList<>();
-        userInGroups = new ArrayList<>();
     }
 
     public int getId() {
@@ -84,27 +73,4 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public List<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(List<Payment> payments) {
-        this.payments = payments;
-    }
-
-    public List<Group> getMyGroups() {
-        return myGroups;
-    }
-
-    public void setMyGroups(List<Group> myGroups) {
-        this.myGroups = myGroups;
-    }
-
-    public List<UserInGroup> getUserInGroups() {
-        return userInGroups;
-    }
-
-    public void setUserInGroups(List<UserInGroup> userInGroups) {
-        this.userInGroups = userInGroups;
-    }
 }

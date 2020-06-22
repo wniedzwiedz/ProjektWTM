@@ -68,36 +68,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView24"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/groupPackageName"
-                android:textColor="@android:color/background_dark" />
-
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/groupPackageNameHint"
-                android:textColor="@android:color/background_dark" />
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/groupPaymentPerPersonVal"
-                android:textColor="@android:color/background_dark" />
-
-            <TextView
-                android:id="@+id/textView27"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/groupPaymentPerPersonText"
-                android:textColor="@android:color/background_dark" />
-
-            <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,12 +127,6 @@
                 android:text="@string/InfoText"
                 android:textColor="@android:color/background_dark" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical"></LinearLayout>
 
             <TextView
                 android:id="@+id/textView34"
@@ -170,6 +134,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/groupMembersText"
                 android:textColor="@android:color/background_dark" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"></LinearLayout>
+
 
             <Button
                 android:id="@+id/button5"

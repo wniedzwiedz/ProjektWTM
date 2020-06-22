@@ -2,123 +2,146 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_mainLayout"
+    android:background="@color/white"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     tools:context=".fragmenty.AddGroupFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddGroupAcitivity">
+        android:layout_margin="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp">
 
-        <ScrollView
-            android:layout_width="409dp"
-            android:layout_height="729dp"
-            android:layout_margin="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView61"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/addGroupLabel"
+                android:textColor="@android:color/background_dark"
+                android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/textView61"
-                    android:layout_width="382dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="0dp"
-                    android:gravity="center"
-                    android:text="@string/addGroupLabel"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="30sp"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/textView62"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/errorGroupAdd"
+                android:textColor="@android:color/holo_red_dark" />
 
-                <TextView
-                    android:id="@+id/textView62"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/errorGroupAdd"
-                    android:textColor="@android:color/holo_red_dark" />
+            <EditText
+                android:id="@+id/editText14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/nameAddGroup"
+                android:inputType="textPersonName"
+                android:text="@string/nameAddGroup"
+                android:textColor="@color/design_default_color_on_secondary" />
 
-                <EditText
-                    android:id="@+id/editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:hint="@string/groupPaymentDeadlineVal"
-                    android:inputType="textPersonName"
-                    android:text="@string/groupPaymentDeadlineVal"
-                    android:textColor="@android:color/background_dark" />
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nameAddText"
+                android:textColor="@color/ic_netflix_background" />
 
-                <TextView
-                    android:id="@+id/textView52"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/PaymentDeadlineLayout"
-                    android:textColor="@android:color/background_dark" />
+            <EditText
+                android:id="@+id/editText15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/peopleNumber"
+                android:inputType="textPersonName"
+                android:text="@string/peopleNumber" />
 
-                <EditText
-                    android:id="@+id/editText8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:hint="@string/groupBankAccountNumberVal"
-                    android:inputType="textPersonName"
-                    android:text="@string/groupBankAccountNumberVal"
-                    android:textColor="@android:color/background_dark" />
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/maxMembers"
+                android:textColor="@color/design_default_color_on_secondary" />
 
-                <TextView
-                    android:id="@+id/textView54"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/BankAccountLabel"
-                    android:textColor="@android:color/background_dark" />
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/groupPaymentDeadlineVal"
+                android:inputType="textPersonName"
+                android:text="@string/groupPaymentDeadlineVal"
+                android:textColor="@android:color/background_dark" />
 
-                <EditText
-                    android:id="@+id/editText13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:hint="@string/groupLoginVal"
-                    android:inputType="textPersonName"
-                    android:text="@string/groupLoginVal"
-                    android:textColor="@android:color/background_dark" />
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/PaymentDeadlineLayout"
+                android:textColor="@android:color/background_dark" />
 
-                <TextView
-                    android:id="@+id/textView56"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/InfoText"
-                    android:textColor="@android:color/background_dark" />
+            <EditText
+                android:id="@+id/editText8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/groupBankAccountNumberVal"
+                android:inputType="textPersonName"
+                android:text="@string/groupBankAccountNumberVal"
+                android:textColor="@android:color/background_dark" />
 
-                <Button
-                    android:id="@+id/button13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/addGroupButton"
-                    android:textColor="@android:color/background_dark" />
+            <TextView
+                android:id="@+id/textView54"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/BankAccountLabel"
+                android:textColor="@android:color/background_dark" />
 
-            </LinearLayout>
-        </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/editText13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:hint="@string/groupLoginVal"
+                android:inputType="textPersonName"
+                android:text="@string/groupLoginVal"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/InfoText"
+                android:textColor="@android:color/background_dark" />
+
+            <Button
+                android:id="@+id/button13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/addGroupButton"
+                android:textColor="@android:color/background_dark" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

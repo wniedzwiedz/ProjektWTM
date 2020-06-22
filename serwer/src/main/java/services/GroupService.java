@@ -91,14 +91,11 @@ public class GroupService {
         if (group.getMaxNumberOfMembers() != 0) {
             newGroup.setMaxNumberOfMembers(group.getMaxNumberOfMembers());
         }
-        if (group.getLoginHash() != null) {
-            newGroup.setLoginHash(group.getLoginHash());
+        if (group.getInformation() != null) {
+            newGroup.setInformation(group.getInformation());
         }
-        if (group.getPasswordHash() != null) {
-            newGroup.setPasswordHash(group.getPasswordHash());
-        }
-        if (group.getGroupHash() != null) {
-            newGroup.setGroupHash(group.getGroupHash());
+        if (group.getPaymentInfo() != null) {
+            newGroup.setPaymentInfo(group.getPaymentInfo());
         }
         entityManager.persist(newGroup);
         return newGroup;
@@ -142,14 +139,11 @@ public class GroupService {
         if (group.getMaxNumberOfMembers() != 0) {
             g.setMaxNumberOfMembers(group.getMaxNumberOfMembers());
         }
-        if (group.getLoginHash() != null) {
-            g.setLoginHash(group.getLoginHash());
+        if (group.getInformation() != null) {
+            g.setInformation(group.getInformation());
         }
-        if (group.getPasswordHash() != null) {
-            g.setPasswordHash(group.getPasswordHash());
-        }
-        if (group.getGroupHash() != null) {
-            g.setGroupHash(group.getGroupHash());
+        if (group.getPaymentInfo() != null) {
+            g.setPaymentInfo(group.getPaymentInfo());
         }
         return g;
     }

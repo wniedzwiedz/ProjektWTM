@@ -3,10 +3,6 @@ package com.example.projektwtm.fragmenty;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +10,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.example.projektwtm.Constants;
 import com.example.projektwtm.DBHelper;
 import com.example.projektwtm.Encryption;
 import com.example.projektwtm.LoginActivity;
 import com.example.projektwtm.R;
+import com.example.projektwtm.RootFragment;
 import com.example.projektwtm.modele.User;
-
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -39,9 +32,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.ws.rs.core.Response;
-
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends RootFragment {
 
     private EditText firstnameET;
     private EditText surnameET;

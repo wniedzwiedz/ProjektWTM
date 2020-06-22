@@ -1,15 +1,8 @@
 package com.example.projektwtm.fragmenty;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,9 +11,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.projektwtm.Constants;
 import com.example.projektwtm.DBHelper;
 import com.example.projektwtm.R;
+import com.example.projektwtm.RootFragment;
 import com.example.projektwtm.modele.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -36,7 +34,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserGroupsFragment extends Fragment {
+public class UserGroupsFragment extends RootFragment {
 
     public static int groupID;
 

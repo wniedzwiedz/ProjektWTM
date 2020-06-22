@@ -3,11 +3,6 @@ package com.example.projektwtm.fragmenty;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.projektwtm.Constants;
 import com.example.projektwtm.R;
+import com.example.projektwtm.RootFragment;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,11 +30,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.ws.rs.core.Response;
-
-public class SearchPackagesFragment extends Fragment {
+public class SearchPackagesFragment extends RootFragment {
     public static int packID;
     LinearLayout linearLayout;
+
+    public SearchPackagesFragment() {
+
+    }
 
     @Nullable
     @Override
@@ -101,8 +100,8 @@ public class SearchPackagesFragment extends Fragment {
                                                             e.printStackTrace();
                                                         }
                                                         Fragment newFragment = new SearchGroupsFragment();
-                                                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                                        transaction.replace(((ViewGroup)getView().getParent()).getId(), newFragment);
+                                                        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                                                        transaction.replace(R.id.fragment_mainLayout, newFragment);
                                                         transaction.addToBackStack(null);
                                                         transaction.commit();
 

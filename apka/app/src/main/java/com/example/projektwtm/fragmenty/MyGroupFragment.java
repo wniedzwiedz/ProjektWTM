@@ -1,10 +1,6 @@
 package com.example.projektwtm.fragmenty;
 
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +9,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.example.projektwtm.R;
+import com.example.projektwtm.RootFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MyGroupFragment extends Fragment {
+public class MyGroupFragment extends RootFragment {
 
     @Nullable
     @Override

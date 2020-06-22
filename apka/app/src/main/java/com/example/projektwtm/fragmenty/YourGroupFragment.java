@@ -2,24 +2,19 @@ package com.example.projektwtm.fragmenty;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.example.projektwtm.Constants;
 import com.example.projektwtm.R;
-
-import org.json.JSONException;
-import org.w3c.dom.Text;
+import com.example.projektwtm.RootFragment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,9 +23,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Pattern;
 
-public class YourGroupFragment extends Fragment {
+public class YourGroupFragment extends RootFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

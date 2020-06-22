@@ -1,4 +1,4 @@
-insert into user_entity(id, first_name, last_name, email, password_hash) values (1, 'Sandra', 'Giermanska', 'sg@gmail.com', 'avc,fxrhafhargkauhrgry');
+insert into user_entity(id, first_name, last_name, email, password_hash) values (1, 'Sandra', 'Giermanska', 'sg@gmail.com', '1000:e30d5c33238b33a5065ac5ff13f1b548:24b854626aad97c937a6c6fbcaf753066c7d329d33b8e3d8312ab2d0d9ccdd65400070f7fda62067edbc05b79be6232e238b812631d4197f60d45337481548b4');
 insert into user_entity(id, first_name, last_name, email, password_hash) values (2, 'Anna', 'Nowak', 'an@yahoo.com', 'avc,fxrhafhabshvtjhgtayxrgfy');
 insert into user_entity(id, first_name, last_name, email, password_hash) values (3, 'Zbyszek', 'Nowak', 'zbych@yahoo.com', 'qqqfggthtnhkjshvtjhgtayxrgfy');
 insert into user_entity(id, first_name, last_name, email, password_hash) values (4, 'Antek', 'Bomba', 'antekb@o2.pl', 'ahurhbbngzzdgthjbngdzgbn');

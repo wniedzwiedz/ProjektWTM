@@ -3,11 +3,6 @@ package com.example.projektwtm.fragmenty;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.projektwtm.Constants;
 import com.example.projektwtm.DBHelper;
 import com.example.projektwtm.R;
+import com.example.projektwtm.RootFragment;
 import com.example.projektwtm.modele.User;
 
 import java.io.BufferedReader;
@@ -31,7 +31,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddGroupFragment extends Fragment {
+public class AddGroupFragment extends RootFragment {
 
     private EditText paymentDeadlineET;
     private EditText accountNumberET;

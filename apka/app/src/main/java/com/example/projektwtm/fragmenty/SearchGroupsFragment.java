@@ -4,13 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,9 +12,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.projektwtm.Constants;
 import com.example.projektwtm.R;
-import com.example.projektwtm.fragmenty.AddGroupFragment;
+import com.example.projektwtm.RootFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -32,11 +29,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-public class SearchGroupsFragment extends Fragment {
+public class SearchGroupsFragment extends RootFragment {
+
     public static int groupID;
+
+    public SearchGroupsFragment() {
+
+    }
 
     @Nullable
     @Override
@@ -57,11 +58,11 @@ public class SearchGroupsFragment extends Fragment {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View view) {
-                Fragment fragment = new AddGroupFragment();
-                FragmentManager fragmentManager = getChildFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.layout.fragment_search_groups, fragment);
-                fragmentTransaction.commit();
+                Fragment newFragment = new AddGroupFragment();
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_mainLayout, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
@@ -105,8 +106,8 @@ public class SearchGroupsFragment extends Fragment {
                                                         e.printStackTrace();
                                                     }
                                                     Fragment newFragment = new SearchGroupsFragment();
-                                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                                    transaction.replace(((ViewGroup) getView().getParent()).getId(), newFragment);
+                                                    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                                                    transaction.replace(R.id.fragment_mainLayout, newFragment);
                                                     transaction.addToBackStack(null);
                                                     transaction.commit();
                                                 }

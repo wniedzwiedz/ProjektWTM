@@ -1,23 +1,9 @@
 package com.example.projektwtm.fragmenty;
 
-import android.app.Activity;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,31 +12,33 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.projektwtm.Constants;
-import com.example.projektwtm.LoginActivity;
-import com.example.projektwtm.MainActivity;
-import com.example.projektwtm.R;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import com.example.projektwtm.Constants;
+import com.example.projektwtm.R;
+import com.example.projektwtm.RootFragment;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.ws.rs.core.Response;
 
-public class SearchAppsFragment extends Fragment {
+public class SearchAppsFragment extends RootFragment {
     public static int appID;
     private LinearLayout linearLayout;
+
+    public SearchAppsFragment() {
+
+    }
 
     @Nullable
     @Override
@@ -98,7 +86,7 @@ public class SearchAppsFragment extends Fragment {
                                             JSONObject jsonObject = null;
                                             try {
                                                 jsonObject = finalJsonArray.getJSONObject(i);
-                                                TextView text = new TextView(getContext());
+                                                final TextView text = new TextView(getContext());
                                                 text.setText(jsonObject.getString("name"));
                                                 text.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 32);
                                                 text.setTextColor(Color.BLACK);
@@ -112,11 +100,11 @@ public class SearchAppsFragment extends Fragment {
                                                             e.printStackTrace();
                                                         }
                                                         Fragment newFragment = new SearchPackagesFragment();
-                                                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                                        transaction.replace(getView().findViewById(R.id.viewPager).getId(), newFragment);
-//                                                        transaction.replace(R.id.viewPager, newFragment);
-//                                                        transaction.replace(((ViewPager) getView().getParent()).getId(), newFragment);
+                                                        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                                                         transaction.addToBackStack(null);
+//                                                        getView().setVisibility(View.GONE);
+//                                                        transaction.hide(ge);
+                                                        transaction.replace(R.id.fragment_mainLayout , newFragment);
                                                         transaction.commit();
 
                                                     }

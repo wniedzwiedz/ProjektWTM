@@ -1,48 +1,45 @@
 package com.example.projektwtm;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabLayout;
-
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class MainPage extends AppCompatActivity {
 
-    TabLayout tabLayout;
-    ViewPager viewPager;
+    private CarouselFragment carouselFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        if (savedInstanceState == null) {
+            initScreen();
+        } else {
+            carouselFragment = (CarouselFragment) getSupportFragmentManager().getFragments().get(0);
+        }
+    }
 
-        final PagerAdapter adapter = new PagerAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+    private void initScreen() {
+        carouselFragment = new CarouselFragment();
 
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, carouselFragment) //nie wiem, czy tu nie wystarczy uzyc naszych frame layoutow
+                .commit();
+    }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
+    @Override
+    public void onBackPressed() {
+        if (!carouselFragment.onBackPressed()) {
+            super.onBackPressed();
+        } else {
+        }
     }
 }

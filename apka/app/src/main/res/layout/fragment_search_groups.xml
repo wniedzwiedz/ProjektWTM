@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchGroupsFragment">
+    tools:context=".fragmenty.SearchGroupsFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -21,6 +21,8 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginTop="52dp"
             android:orientation="vertical">
 
         </LinearLayout>

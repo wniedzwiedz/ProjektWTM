@@ -1,4 +1,4 @@
-package com.example.projektwtm;
+package com.example.projektwtm.fragmenty;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.projektwtm.Constants;
+import com.example.projektwtm.R;
 
 import org.json.JSONException;
 import org.w3c.dom.Text;

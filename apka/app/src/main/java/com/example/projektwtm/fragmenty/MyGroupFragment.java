@@ -1,4 +1,4 @@
-package com.example.projektwtm;
+package com.example.projektwtm.fragmenty;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.projektwtm.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

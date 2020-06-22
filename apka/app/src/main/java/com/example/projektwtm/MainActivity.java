@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         List users = new ArrayList<>();
         try {
-            users.addAll(dbHelper.getUser(User.class));
+            users.addAll(dbHelper.getUser());
         } catch (SQLException e) {
             e.printStackTrace();
         }

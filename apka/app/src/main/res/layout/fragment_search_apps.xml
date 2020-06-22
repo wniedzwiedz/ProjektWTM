@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchAppsFragment">
+    tools:context=".fragmenty.SearchAppsFragment">
 
     <TextView
         android:id="@+id/textView41"
@@ -16,12 +16,19 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:layout_marginTop="52dp">
 
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:layout_gravity="top"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+
+        </LinearLayout>
     </ScrollView>
+
 </FrameLayout>

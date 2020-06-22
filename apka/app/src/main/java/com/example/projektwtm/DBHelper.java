@@ -64,7 +64,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     }
 
-    public List<User> getUser(Class<User> userClass) throws SQLException {
+    public List<User> getUser() throws SQLException {
         Dao<User, ?> dao = getDao(User.class);
         return dao.queryForAll();
     }

@@ -1,4 +1,4 @@
-package com.example.projektwtm;
+package com.example.projektwtm.fragmenty;
 
 import android.os.Bundle;
 
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.projektwtm.R;
 
 public class SpecificUserFragment extends Fragment {
     @Nullable

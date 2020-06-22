@@ -1,4 +1,4 @@
-package com.example.projektwtm;
+package com.example.projektwtm.fragmenty;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.projektwtm.R;
 
 public class UserGroupsFragment extends Fragment {
     @Nullable

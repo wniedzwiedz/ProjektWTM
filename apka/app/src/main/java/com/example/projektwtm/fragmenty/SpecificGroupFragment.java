@@ -1,4 +1,4 @@
-package com.example.projektwtm;
+package com.example.projektwtm.fragmenty;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.projektwtm.R;
 
 public class SpecificGroupFragment extends Fragment {
     @Nullable

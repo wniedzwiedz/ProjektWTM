@@ -1,7 +1,6 @@
-package com.example.projektwtm;
+package com.example.projektwtm.fragmenty;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -16,7 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.projektwtm.modele.Payment;
+import com.example.projektwtm.Constants;
+import com.example.projektwtm.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,9 +25,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.regex.Pattern;
 
 public class AddGroupFragment extends Fragment {
 

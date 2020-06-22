@@ -68,26 +68,61 @@ public class LoginActivity extends AppCompatActivity {
 
         // check if logged
         DBHelper dbHelper = new DBHelper(this);
-        List users = new ArrayList<>();
+        final List<User> users = new ArrayList<>();
         try {
-            users.addAll(dbHelper.getUser(User.class));
+            users.addAll(dbHelper.getUser());
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         if (!users.isEmpty()) {
-            Intent intent = new Intent(this, MainPage.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        URL addUserURL = new URL("http://" + Constants.serverIP + ":8080/FindCo/api/users/" + users.get(0).getId());
+                        HttpURLConnection myConnection = (HttpURLConnection) addUserURL.openConnection();
+                        try {
+                            if (myConnection.getResponseCode() == 200) {
+                                JSONArray jsonArray = null;
+                                try {
+                                    BufferedReader br = new BufferedReader(new InputStreamReader(myConnection.getInputStream(), "utf-8"));
+                                    StringBuilder response = new StringBuilder();
+                                    String responseLine = null;
+                                    while ((responseLine = br.readLine()) != null) {
+                                        response.append(responseLine.trim());
+                                    }
+                                    jsonArray = new JSONArray(response.toString());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (jsonArray != null) {
+                                    Intent intent = new Intent(LoginActivity.this, MainPage.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
         emailET = findViewById(R.id.editText2);
         passET = findViewById(R.id.editText5);
 
         TextView textView = findViewById(R.id.textView12);
-        textView.setText(Html.fromHtml("<font color='black'><u>"+ getResources().getString(R.string.linkRegistration) +"</u></font>"));
-        textView.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        textView.setText(Html.fromHtml("<font color='black'><u>" + getResources().getString(R.string.linkRegistration) + "</u></font>"));
+        textView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -95,9 +130,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         Button button = findViewById(R.id.button2);
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            public void onClick(View v){
+            public void onClick(View v) {
                 final String email = emailET.getText().toString();
                 final String pass = passET.getText().toString();
 
@@ -155,13 +190,13 @@ public class LoginActivity extends AppCompatActivity {
                                         JsonElement element = parser.parse(jsonObject.toString());
                                         Gson gson = new Gson();
                                         User user = gson.fromJson(element, User.class);
-
                                         DBHelper dbHelper = new DBHelper(getApplicationContext());
                                         try {
                                             dbHelper.createOrUpdateUser(user);
                                         } catch (SQLException e) {
                                             e.printStackTrace();
                                         }
+
 
                                         loggedUser = jsonObject;
 

@@ -3,25 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchPackagesFragment">
+    android:layout_marginTop="8dp"
+    android:layout_alignParentTop="true"
+    tools:context=".fragmenty.SearchPackagesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:text="@string/packagesText"
         android:textColor="@android:color/background_dark"
         android:textSize="36sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:layout_marginTop="52dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
             android:orientation="vertical" />
     </ScrollView>
 
